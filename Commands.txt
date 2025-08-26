@@ -1,5 +1,5 @@
-Command for Node Version
+Command for Node Version Checking
 node -v
 
-Command for NPM Version
+Command for NPM Version Checking
 npm -v
