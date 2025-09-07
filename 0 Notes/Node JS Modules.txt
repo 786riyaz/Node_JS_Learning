@@ -1,0 +1,20 @@
+Core Modules :: 
+Core Modules are already inbult with Node JS for basic functionality
+
+List of some core Modules
+console
+fs
+http
+buffer
+============================================================================
+Global Module ::
+Global Modules are globally defined. We dont have to define then before using in JS file.
+e.g. console.log("")
+Here console is global module which we can directly utilies without defining in the same JS file.
+
+While on the other hand, the "fs" module in not a global module. We have to define it before utilizing it.
+const fs = require('fs');
+fs.writeFileSync("Hello.txt","Hello World");
+
+__dirname
+__filename
