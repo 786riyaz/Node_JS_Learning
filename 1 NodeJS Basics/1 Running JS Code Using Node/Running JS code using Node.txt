@@ -1,0 +1,5 @@
+There are 2 ways to run a JS code using Node
+1) Using CMD
+    undefined is printed on terminal after every interaction which is due to the code we are running is not returning any thing.
+
+2) Saving the File and run using "node" command
