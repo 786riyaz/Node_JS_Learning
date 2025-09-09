@@ -1,0 +1,13 @@
+package.json file contains information related to different modules which are required to run the code.
+
+Command for creating Package.json file ===> npm init
+
+when you hit this command, it will ask for 
+name of package 
+version :: 1.0.0
+description :: 
+entry point :: index.js
+git repository
+keywords
+authro
+licence :: ISC
