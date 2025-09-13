@@ -1,0 +1,15 @@
+Node JS Architechture
+===================================================
+There are 4 Things
+1) Code
+2) Call Stack
+3) Node APIs
+4) Callback Queue
+
+Whole the code comes under the "main()" function which resides in Call Stack
+
+Call Stack stores the functions call and remove them once their executions got completed. 
+
+Node APIs stores different API calls and send them to Call back queue for execution.
+
+Callback Query then pass the function execution request to Call Stack once it gets empty.
