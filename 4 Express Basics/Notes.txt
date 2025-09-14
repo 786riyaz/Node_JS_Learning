@@ -1,0 +1,12 @@
+ExpressJS is framework for NodeJS.
+
+Usage :: 
+We can make APIs Easily
+Provides Routes and Middleware
+Provides Get, Post, Put methods for request handling
+easy to create webpages
+Provides way integrate CSS
+
+
+Command to install express ::: 
+npm install express
