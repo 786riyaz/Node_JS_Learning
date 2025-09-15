@@ -1,0 +1,6 @@
+Template Engine is basically NPM module which is useful to create dynamic pages.
+
+ejs is one of the template Engine
+
+Command to install ::
+npm install ejs
