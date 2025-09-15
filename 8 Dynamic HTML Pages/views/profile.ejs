@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+</head>
+
+<body>
+    <h1>This is Profile Page</h1>
+    <h2>Welcome Mr. <%= name %>
+    </h2>
+    <h2>Email ID = <%= email %>
+    </h2>
+    <h2>Address = <%= address %>
+    </h2>
+    <h2>Skills = <%= skills %>
+    </h2>
+
+    <ul>
+        <% skills.forEach((skill)=>{ %>
+            <li>
+                <%= skill %>
+            </li>
+            <% }) %>
+    </ul>
+</body>
+
+</html>
