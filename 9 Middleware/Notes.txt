@@ -1,0 +1,33 @@
+Middleware functions are functions that execute before the final request handler, and can modify the request/response or perform additional operations.
+
+Middleware applies on routes. We can modify the request and response. like we can check age of user or country of user etc.
+
+🔹 What is Middleware?
+In Express.js, middleware is basically a function that sits between the request and the response.
+It has access to:
+req → the request object
+res → the response object
+next → a function that passes control to the next middleware
+
+🔹 Middleware Lifecycle
+When a request comes in:
+1. It enters the first middleware.
+2. If next() is called → goes to the next middleware.
+3. If a response is sent (res.send, res.json, etc.) → request ends.
+4. If no middleware handles it → Express sends a 404 automatically.
+
+✅ In short:
+Middleware = Functions that process requests before they reach the final route handler.
+They’re used for logging, authentication, validation, parsing, error handling, etc.
+=====================================================================
+=====================================================================
+=====================================================================
+
+Types of Middleware 
+
+Threre are 5 types of middleware :::
+1) Application Level Middleware
+2) Router Level Middleware
+3) Error Handling Middleware
+4) Built in Middleware
+5) Third Party Middleware
