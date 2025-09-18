@@ -1,0 +1,33 @@
+MongoDB UpdateMany() and $unset Operator
+
+1.  Update All Documents in a Collection
+
+Syntax: db.collection.updateMany( { }, { }, { upsert: } )
+
+Example — Set a field for all documents: db.users.updateMany( {}, //
+Empty filter means match all documents { $set: { status: “active” } } )
+
+Example — Increment a field in all documents: db.users.updateMany( {}, {
+$inc: { loginCount: 1 } } )
+
+Notes: - The first {} selects all documents. - Use appropriate update
+operators: $set, $inc, $unset, etc. - To add a new field, use $set.
+
+Verify Update: db.users.find().pretty()
+
+2.  $unset Operator (Remove Fields)
+
+What It Means: - $unset removes a specific field from documents.
+
+Syntax: db.collection.updateMany( { }, { $unset: { : ““, :”” } } )
+
+Example — Remove a Field from All Documents: db.users.updateMany( {}, //
+Match all documents { $unset: { temporaryField: “” } } // Removes the
+“temporaryField” )
+
+Before: { “_id”: 1, “name”: “Alice”, “temporaryField”: “to be removed” }
+
+After: { “_id”: 1, “name”: “Alice” }
+
+When to Use $unset: - Remove obsolete fields - Clean up documents -
+Avoid storing unnecessary data
