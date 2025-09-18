@@ -1,0 +1,12 @@
+MondoDB is basically a Database.
+MongoDB is non tabular(non SQL) Database.
+
+
+Service Name :::
+MongoDB
+
+Data Directory :::
+C:\Program Files\MongoDB\Server\8.0\data\
+
+Log Directory :::
+C:\Program Files\MongoDB\Server\8.0\log\

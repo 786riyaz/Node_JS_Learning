@@ -19,6 +19,8 @@
   "dependencies": {
     "colors": "^1.4.0",
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mongodb": "^6.19.0",
+    "mongoose": "^8.18.1"
   }
 }
