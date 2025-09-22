@@ -1,0 +1,37 @@
+✅ 1️⃣ What is Mongoose?
+Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js.
+It provides a higher-level abstraction over the native MongoDB driver.
+It helps manage relationships between data, provides schema validation, and offers useful helper methods for CRUD operations.
+
+✅ 2️⃣ What is its Use?
+Main Uses of Mongoose:
+✅ Define Schemas for documents.
+✅ Enforce validation rules.
+✅ Provide model-based interaction with collections (e.g., User.create(), User.find(), User.updateOne(), etc.).
+✅ Support middleware (hooks) such as pre/post save.
+✅ Easy data modeling & object mapping in applications.
+
+✅ 3️⃣ What is the mongodb npm module?
+It’s the official MongoDB driver for Node.js.
+Provides low-level, direct access to MongoDB, including connecting to the database, performing CRUD operations, managing indexes, etc.
+No built-in schema or model abstractions.
+
+✅ 4️⃣ Key Differences:
+| Feature            | Mongoose                            | MongoDB (Official Driver)             |
+| ------------------ | ----------------------------------- | ------------------------------------- |
+| Schema Support     | ✅ Provides schemas and models       | ❌ No schema enforcement               |
+| Data Validation    | ✅ Built-in validation               | ❌ Manual validation needed            |
+| Middleware / Hooks | ✅ Pre/post save hooks               | ❌ Not supported directly              |
+| Abstraction Level  | ✅ Higher-level abstraction (Models) | ✅ Low-level (collections & documents) |
+| Ease of Use        | ✅ Easier for structured apps        | ❌ More flexible but more code needed  |
+| Performance        | Slightly slower due to abstraction  | Faster (minimal abstraction)          |
+
+
+✅ Summary:
+Use Mongoose if:
+You want schema-based modeling.
+You need built-in validation, hooks, or an ORM-like interface.
+
+Use mongodb (official driver) if:
+You need raw control of the database.
+You want minimal abstraction with high performance.
