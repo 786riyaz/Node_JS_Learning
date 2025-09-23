@@ -1,0 +1,4 @@
+Multer package is useful for uploading the files in NodeJs
+Multer Provides ease for uploading files
+
+npm i multer
