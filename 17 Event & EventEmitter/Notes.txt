@@ -1,0 +1,52 @@
+1. What is an Event in Node.js?
+An event is an action or occurrence that can be recognized by your application.
+
+Examples:
+A user clicks a button.
+A file finishes reading.
+A server receives a request.
+In Node.js, events are asynchronous signals that something has happened, and you can run some code when that event occurs.
+
+
+
+2. What is an EventEmitter in Node.js?
+EventEmitter is a class from the events module in Node.js.
+
+It allows you to:
+Emit (trigger) events → using .emit()
+Listen for (subscribe to) events → using .on() or .addListener()
+Basically, it’s like a radio:
+emit() = radio station broadcasting a signal.
+on() = radio listener tuning in to that signal.
+
+
+
+3. Example
+// Import events module
+const EventEmitter = require('events');
+
+// Create an EventEmitter object
+const myEmitter = new EventEmitter();
+
+// Register a listener for 'greet' event
+myEmitter.on('greet', (name) => {
+  console.log(`Hello, ${name}!`);
+});
+
+// Emit the event
+myEmitter.emit('greet', 'Riyaz');
+
+Output:
+Hello, Riyaz!
+
+
+
+4. Key Methods of EventEmitter
+.on(eventName, listener) → Listen for an event.
+.emit(eventName, [args]) → Trigger an event.
+.once(eventName, listener) → Listen for an event only once.
+.removeListener(eventName, listener) / .off() → Stop listening.
+
+✅ So in short:
+Event → A named signal (like "greet", "data", "error").
+EventEmitter → The mechanism in Node.js to create, emit, and listen to those events.
