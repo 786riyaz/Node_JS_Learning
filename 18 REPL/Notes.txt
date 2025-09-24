@@ -1,0 +1,80 @@
+REPL in Node.js
+================
+
+1. What is REPL?
+----------------
+REPL stands for:
+- R -> Read
+- E -> Eval (Evaluate)
+- P -> Print
+- L -> Loop
+
+It is the interactive shell in Node.js that allows you to run JavaScript code line by line.
+
+-------------------------------------------------------------
+
+2. How REPL Works
+-----------------
+- Read  : Takes the user input (JavaScript expression).
+- Eval  : Evaluates the input.
+- Print : Prints the result to the console.
+- Loop  : Waits for the next command.
+
+-------------------------------------------------------------
+
+3. Starting REPL
+----------------
+Open terminal/command prompt and type:
+
+    node
+
+You will see:
+
+    Welcome to Node.js v20.x.x
+    Type ".help" for more information.
+    >
+
+The '>' symbol is the REPL prompt.
+
+-------------------------------------------------------------
+
+4. Examples
+-----------
+> 2 + 3
+5
+
+> let name = "Riyaz"
+undefined
+
+> name
+'Riyaz'
+
+> name.toUpperCase()
+'RIYAZ'
+
+-------------------------------------------------------------
+
+5. Special Commands in REPL
+----------------------------
+- .help             : Show all available commands
+- .exit             : Exit from REPL (or press Ctrl+C twice)
+- .clear            : Reset the REPL context
+- .save filename.js : Save current REPL session to a file
+- .load filename.js : Load a JavaScript file into REPL
+- .editor           : Enter editor mode (multi-line input). 
+                      Type code over multiple lines, press Ctrl+D to run it.
+- .help             : Lists all these special REPL commands and usage.
+
+-------------------------------------------------------------
+
+6. Why Use REPL?
+-----------------
+- Quickly test small pieces of JavaScript code.
+- Debug or explore Node.js built-in modules.
+- Learn and experiment with JavaScript interactively.
+
+-------------------------------------------------------------
+
+Summary:
+--------
+REPL = Node.js playground in your terminal.
