@@ -1,0 +1,25 @@
+pending 
+How to fetch documents (Records) from multiple collection(Table) in Mongo DB
+How to fetch Records from multiple Table in MySQL
+
+What is the use of fields in this statement ==> con.query(SqlQuery, (err, result, fields) => in this code
+app.put("/", (req, res) => {
+  console.log("Inside Update Method");
+  let requestBody = req.body;
+  console.log("Request Body ::", requestBody);
+
+  let ProductName = requestBody.ProductName;
+  let Category = requestBody.Category;
+  let Brand = requestBody.Brand;
+  let Price = requestBody.Price;
+  let SqlQuery = `UPDATE Products SET ProductName = '${ProductName}', Category = '${Category}', Brand = '${Brand}', Price= ${Price} WHERE ProductName = '${ProductName}';`;
+
+  con.query(SqlQuery, (err, result, fields) => {
+    if (err) {
+      console.log("Error has been occured during the edit process");
+    } else {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
