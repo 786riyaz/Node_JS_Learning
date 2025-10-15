@@ -1,0 +1,22 @@
+npm install express nodemailer dotenv cors
+
+
+.env File
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_USER=your-email@gmail.com
+SMTP_PASS=your-app-password-or-real-password
+SENDER_EMAIL=your-email@gmail.com
+REPLY_TO=reply-to-email@gmail.com
+
+
+Here's how to generate SMTP_PASS:
+Enable 2-Step Verification: If you haven't already, enable 2-Step Verification on your Google Account. This is a prerequisite for generating App Passwords. You can do this by going to your Google Account settings, navigating to "Security," and then finding the "2-Step Verification" option.
+Navigate to App Passwords: Once 2-Step Verification is enabled, return to the "Security" section of your Google Account settings. Scroll down to the "Signing in to Google" section and click on "App passwords." You might need to re-enter your Google password for security.
+Generate a new App Password:
+In the "App passwords" section, you'll see options to select an app and a device.
+Choose "Mail" as the app.
+For the device, you can select "Other (Custom Name)" and enter a descriptive name like "Nodemailer" or "Node.js Mailer."
+Click the "Generate" button.
+Copy the 16-character password: A pop-up window will display a unique 16-character password. This is your App Password. Copy this password carefully, as it will only be displayed once.
+Use the App Password in Nodemailer: In your Nodemailer configuration, use this 16-character App Password as the pass value in the auth object for your Gmail transporter.
