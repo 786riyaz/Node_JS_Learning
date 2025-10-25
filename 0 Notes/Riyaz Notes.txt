@@ -11,7 +11,7 @@ YouTube Video Link for learning
 Node js complete tutorial in Hindi - Full Node course in one video
 https://www.youtube.com/watch?v=VrQgmNY96wo
 
-0.     00:00​       What si Node js and course Introduction
+0.     00:00​       What is Node js and course Introduction
 1.     08:31​       Basic theory of node js 
 2.     14:00​       Installation and setup
 3.     20:25​       First script program with node js 

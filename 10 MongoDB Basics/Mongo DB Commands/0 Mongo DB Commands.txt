@@ -1,4 +1,4 @@
-MongoDB Useful Commands ----
+MongoDB Useful Commands
 
 ✅ MongoDB Installation Check :::
     mongo
