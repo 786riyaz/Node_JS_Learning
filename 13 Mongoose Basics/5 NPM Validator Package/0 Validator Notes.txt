@@ -1,0 +1,23 @@
+https://www.npmjs.com/package/validator
+
+npm i validator
+
+Before ES6
+var validator = require('validator');
+
+ES6
+import validator from 'validator';
+import isEmail from 'validator/lib/isEmail';
+import isEmail from 'validator/es/lib/isEmail';
+
+  emailID : {
+    type : String,
+    required : false,
+    trim : true,
+    validate : {
+      validator : function(v) {
+        return /^\d{3}-\d{3}-\d{4}$/.test(v);     // return true if valid else false
+      },
+      message : props => `${props.value} is not a valid phone number! Format should be XXX-XXX-XXXX.`
+    }
+  },

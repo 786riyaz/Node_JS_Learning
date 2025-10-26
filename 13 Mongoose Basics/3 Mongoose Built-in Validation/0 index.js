@@ -1,4 +1,3 @@
-const validator  = require ('validator');
 const mongoose = require('mongoose');
 
 // Add connection options
@@ -32,8 +31,6 @@ const customerSchema = new mongoose.Schema({
     max: [120, 'Age seems unrealistic']
   },
 
-  
-
   // Optional string with trim and maxlength
   city: { 
     type: String,
@@ -55,12 +52,7 @@ const customerSchema = new mongoose.Schema({
     unique: true,
     lowercase: true,
     trim: true,
-    validate : {
-      validator : function(v) {
-        return validator.isEmail(v)     // return true if valid else false
-      },
-      message : props => `${props.value} is not a valid Email ID`
-    }
+    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/, 'Please enter a valid email']
   },
 
   // Mobile number: optional, must be exactly 10 digits
@@ -68,25 +60,9 @@ const customerSchema = new mongoose.Schema({
     type: String,
     required: false,
     trim: true,
-    validate (value) {
-      if(value.toString().length !== 10){
-        throw new Error('Mobile number must be exactly 10 digits');
-      }
-    }
-  },
-
-  // Phone number with custom validator (format: XXX-XXX-XXXX)
-  phone : {
-    type : String,
-    required : false,
-    trim : true,
-    validate : {
-      validator : function(v) {
-        return /^\d{3}-\d{3}-\d{4}$/.test(v);     // return true if valid else false
-      },
-      // message : props => `${props.value} is not a valid phone number! Format should be XXX-XXX-XXXX.`
-      message :  `Invalid phone number! Format should be XXX-XXX-XXXX.`
-    }
+    match: [/^\d{10}$/, 'Mobile number must be exactly 10 digits'],
+    minlength: [10, 'Mobile number must be 10 digits'],
+    maxlength: [10, 'Mobile number must be 10 digits']
   },
 
   // Enum with default
@@ -154,10 +130,9 @@ const newCustomerData = {
   age: 30, 
   city: 'New York', 
   balance: 1000, 
-  emailID: 'john.doe@', 
+  emailID: 'john.doe@gmail.com', 
   mobile: '1234567890',
   customerID: 9,
-  phone: '123-456-7890',
   password: 's3cur3P@ssw0rd',
   tags: ['premium','newsletter'],
   address: { street: '123 Main St', zip: '10001', country: 'USA' }

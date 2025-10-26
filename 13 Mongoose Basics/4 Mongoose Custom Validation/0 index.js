@@ -1,4 +1,3 @@
-const validator  = require ('validator');
 const mongoose = require('mongoose');
 
 // Add connection options
@@ -55,12 +54,7 @@ const customerSchema = new mongoose.Schema({
     unique: true,
     lowercase: true,
     trim: true,
-    validate : {
-      validator : function(v) {
-        return validator.isEmail(v)     // return true if valid else false
-      },
-      message : props => `${props.value} is not a valid Email ID`
-    }
+    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/, 'Please enter a valid email']
   },
 
   // Mobile number: optional, must be exactly 10 digits
@@ -154,7 +148,7 @@ const newCustomerData = {
   age: 30, 
   city: 'New York', 
   balance: 1000, 
-  emailID: 'john.doe@', 
+  emailID: 'john.doe@gmail.com', 
   mobile: '1234567890',
   customerID: 9,
   phone: '123-456-7890',
