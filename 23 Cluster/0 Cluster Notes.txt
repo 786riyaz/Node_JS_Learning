@@ -1,0 +1,12 @@
+By default the cluster uses Round Robin algorithm in MacOS and Linux
+
+But in Windows, the os load balance decides which core to use.
+
+On Linux/macOS, the cluster module uses a round-robin approach (it distributes connections evenly among workers).
+
+On Windows, Node disables round-robin by default for performance reasons — so the OS decides which worker handles which connection (usually the same one each time).
+
+
+You can tell Node to enable round-robin manually using:
+  // Force round-robin scheduling on Windows
+  cluster.schedulingPolicy = cluster.SCHED_RR;
