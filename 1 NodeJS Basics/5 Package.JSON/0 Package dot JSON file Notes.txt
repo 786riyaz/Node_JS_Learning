@@ -9,5 +9,5 @@ description ::
 entry point :: index.js
 git repository
 keywords
-authro
+author
 licence :: ISC

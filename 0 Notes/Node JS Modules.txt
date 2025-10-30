@@ -8,7 +8,7 @@ http
 buffer
 ============================================================================
 Global Module ::
-Global Modules are globally defined. We dont have to define then before using in JS file.
+Global Modules are globally defined. We dont have to define them before using in JS file.
 e.g. console.log("")
 Here console is global module which we can directly utilies without defining in the same JS file.
 

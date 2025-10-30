@@ -8,3 +8,209 @@ Or use environment variables:
     export AWS_ACCESS_KEY_ID=YOUR_KEY
     export AWS_SECRET_ACCESS_KEY=YOUR_SECRET
     export AWS_REGION=YOUR_REGION
+
+===================================================================
+https://chatgpt.com/c/690246bb-788c-8320-9a27-2881dde9163c
+AWS Integration
+---
+
+## 🧩 Step 1 — ✅ Backend (you already have this)
+
+You’ve already done this part — your `server.js` (or `index.js`) correctly connects to your Lex bot and replies to `/chat` POST requests.
+Keep that code exactly as it is.
+
+---
+
+## 🔒 Step 2 — Add JWT Authentication for Secure API Access
+
+This will ensure only authenticated users can talk to your Lex endpoint.
+
+Install dependencies:
+
+```bash
+npm install jsonwebtoken bcrypt dotenv
+```
+
+Then edit your `server.js` like this 👇 (secure version):
+
+```js
+import express from "express";
+import { LexRuntimeV2Client, RecognizeTextCommand } from "@aws-sdk/client-lex-runtime-v2";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const app = express();
+app.use(express.json());
+
+const JWT_SECRET = process.env.JWT_SECRET || "your_secret_here";
+const client = new LexRuntimeV2Client({ region: "ap-southeast-2" });
+
+// Demo user (in production, you’d use DB)
+const user = { username: "admin", password: await bcrypt.hash("123456", 10) };
+
+// --- Login route ---
+app.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  if (username !== "admin" || !(await bcrypt.compare(password, user.password))) {
+    return res.status(401).json({ error: "Invalid credentials" });
+  }
+  const token = jwt.sign({ username }, JWT_SECRET, { expiresIn: "1h" });
+  res.json({ token });
+});
+
+// --- Middleware to protect routes ---
+function verifyToken(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (!authHeader) return res.status(403).json({ error: "No token provided" });
+  const token = authHeader.split(" ")[1];
+  try {
+    req.user = jwt.verify(token, JWT_SECRET);
+    next();
+  } catch {
+    res.status(403).json({ error: "Invalid or expired token" });
+  }
+}
+
+// --- Chat route (protected) ---
+app.post("/chat", verifyToken, async (req, res) => {
+  try {
+    const { text, sessionId } = req.body;
+    const command = new RecognizeTextCommand({
+      botId: "PKHTFQHUDD",
+      botAliasId: "MM7CUD6BTC",
+      localeId: "en_US",
+      sessionId: sessionId || "default-user",
+      text,
+    });
+    const response = await client.send(command);
+    res.json({ message: response.messages });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.listen(3000, () => console.log("Lex bot connected on http://localhost:3000"));
+```
+
+---
+
+## 💬 Step 3 — Add a Simple Frontend (HTML + JS)
+
+Create a new file `index.html` in your project root:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lex Chatbot</title>
+  <style>
+    body { font-family: Arial; background: #f5f5f5; padding: 30px; }
+    #chat { background: white; padding: 20px; border-radius: 10px; max-width: 500px; margin: auto; }
+    .msg { margin: 8px 0; }
+    .user { text-align: right; color: blue; }
+    .bot { text-align: left; color: green; }
+  </style>
+</head>
+<body>
+  <div id="chat">
+    <h3>Lex Chat</h3>
+    <div id="messages"></div>
+    <input id="text" placeholder="Type a message..." />
+    <button onclick="send()">Send</button>
+  </div>
+
+  <script>
+    const API = "http://localhost:3000";
+    let token = "";
+
+    async function login() {
+      const res = await fetch(API + "/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "admin", password: "123456" }),
+      });
+      const data = await res.json();
+      token = data.token;
+    }
+
+    async function send() {
+      if (!token) await login();
+      const text = document.getElementById("text").value;
+      addMsg("user", text);
+      document.getElementById("text").value = "";
+      const res = await fetch(API + "/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token,
+        },
+        body: JSON.stringify({ text }),
+      });
+      const data = await res.json();
+      const msg = data.message?.[0]?.content || "No reply";
+      addMsg("bot", msg);
+    }
+
+    function addMsg(type, text) {
+      const div = document.createElement("div");
+      div.className = "msg " + type;
+      div.textContent = text;
+      document.getElementById("messages").appendChild(div);
+    }
+
+    login();
+  </script>
+</body>
+</html>
+```
+
+Run your Node server and open `index.html` in the browser — you’ll see a simple chat box.
+
+---
+
+## ☁️ Step 4 — Deploy to AWS
+
+You have several good options:
+
+### Option 1 — **Elastic Beanstalk** (for full Node app)
+
+```bash
+eb init
+eb create
+eb open
+```
+
+This automatically hosts your Express app on AWS.
+
+### Option 2 — **EC2 instance**
+
+* Launch an EC2 instance (Amazon Linux)
+* Install Node.js (`sudo yum install nodejs -y`)
+* Upload your project (`scp` or Git)
+* Run: `npm install` → `node server.js`
+* Open port 3000 in the EC2 security group
+
+### Option 3 — **Amplify** (if you only want to host the frontend)
+
+* Go to [AWS Amplify Console](https://console.aws.amazon.com/amplify/home)
+* Connect your GitHub repo or upload the static `index.html`
+* Configure API endpoint to point to your Node/Beanstalk URL
+
+---
+
+## 🎁 Summary
+
+✅ Lex → Node.js integration complete
+✅ JWT auth & protected route added
+✅ Simple browser chat frontend
+✅ Deployment roadmap (Beanstalk / EC2 / Amplify)
+
+---
+
+Would you like me to **create a React JS chat UI** version next (with message history, typing indicator, etc.) instead of the basic HTML one?

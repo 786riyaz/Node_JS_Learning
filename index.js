@@ -5,19 +5,15 @@ const app = express();
 app.use(express.json());
 
 // Initialize Lex client
-// const client = new LexRuntimeV2Client({ region: "us-east-1" }); // change to your region
-const client = new LexRuntimeV2Client({ region: "ap-southeast-2" }); // change to your region
-// const client = new LexRuntimeV2Client({ region: "ap-south-1" });
-
+const client = new LexRuntimeV2Client({ region: "us-east-1" }); // change to your region
 
 app.post("/chat", async (req, res) => {
   try {
     const { text, sessionId } = req.body;
 
     const command = new RecognizeTextCommand({
-      botId: "PKHTFQHUDD",
-      // botAliasId: "TSTALIASID",
-      botAliasId: "MM7CUD6BTC",
+      botId: "BOT_ID",
+      botAliasId: "BOT_ALIAS_ID",
       localeId: "en_US",
       sessionId: sessionId || "default-user",
       text,
