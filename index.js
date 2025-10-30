@@ -1,28 +1,34 @@
-const cluster = require("cluster");
-const os = require("os");
-const express = require("express");
+import express from "express";
+import { LexRuntimeV2Client, RecognizeTextCommand } from "@aws-sdk/client-lex-runtime-v2";
 
-const port = 786;
+const app = express();
+app.use(express.json());
 
-if (cluster.isMaster) {
-  // Force round-robin scheduling on Windows
-  cluster.schedulingPolicy = cluster.SCHED_RR;
+// Initialize Lex client
+// const client = new LexRuntimeV2Client({ region: "us-east-1" }); // change to your region
+const client = new LexRuntimeV2Client({ region: "ap-southeast-2" }); // change to your region
+// const client = new LexRuntimeV2Client({ region: "ap-south-1" });
 
-  const numCPUs = os.cpus().length;
-  console.log(`Master ${process.pid} is running`);
-  for (let i = 0; i < numCPUs; i++) {
-    cluster.fork();
+
+app.post("/chat", async (req, res) => {
+  try {
+    const { text, sessionId } = req.body;
+
+    const command = new RecognizeTextCommand({
+      botId: "PKHTFQHUDD",
+      // botAliasId: "TSTALIASID",
+      botAliasId: "MM7CUD6BTC",
+      localeId: "en_US",
+      sessionId: sessionId || "default-user",
+      text,
+    });
+
+    const response = await client.send(command);
+    res.json({ message: response.messages });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err.message });
   }
-  cluster.on("exit", (worker) => {
-    console.log(`Worker ${worker.process.pid} died`);
-  });
-} else {
-  const app = express();
-  app.get("/", (req, res) => {
-    console.log("Request handled by process id: " + process.pid);
-    res.send("Hello from worker ::: " + process.pid);
-  });
-  app.listen(port, () => {
-    console.log(`Worker ${process.pid} listening on port ${port}`);
-  });
-}
+});
+
+app.listen(3000, () => console.log("Lex bot connected on http://localhost:3000"));

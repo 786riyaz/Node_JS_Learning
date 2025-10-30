@@ -1,0 +1,375 @@
+Request:
+POST → http://localhost:786/api/auth/register
+
+Body (JSON):
+{
+  "email": "user1@example.com",
+  "password": "Password123"
+}
+
+Expected Response:
+{
+  "message": "User registered"
+}
+======================================================================================
+Request:
+POST → http://localhost:786/api/auth/login
+
+Body (JSON):
+{
+  "email": "user1@example.com",
+  "password": "Password123"
+}
+
+Expected Response:
+{
+  "message": "Logged in"
+}
+======================================================================================
+🔹 Access a Protected Route (with token cookie)
+
+Request:
+GET → http://localhost:786/api/balance
+
+Make sure:
+
+You are still in the same Postman session (so the cookie is sent automatically)
+
+OR copy the token manually from Cookies or JWT.io and send it in the header:
+
+Authorization: Bearer <your_token_here>
+
+
+Expected Response:
+
+{
+  "message": "Hello user1@example.com",
+  "balance": 0
+}
+======================================================================================
+🔹 Admin-only endpoint (optional)
+
+The default demo user riyaz@example.com has role "user" by default.
+If you want an admin, you can register one like this:
+
+{
+  "email": "admin@example.com",
+  "password": "Admin123",
+  "role": "admin"
+}
+
+
+Then test:
+GET → http://localhost:786/api/admin/users
+
+If logged in as admin, you’ll see:
+
+{
+  "users": [
+    { "email": "riyaz@example.com", "role": "user" },
+    { "email": "admin@example.com", "role": "admin" }
+  ]
+}
+======================================================================================
+🔹 Logout
+
+Request:
+POST → http://localhost:786/api/auth/logout
+
+Expected Response:
+
+{
+  "message": "Logged out"
+}
+
+
+===========================================================================
+Nice — I’ll walk through your file **line-by-line**, explain what each part does, and give short interview-friendly talking points and improvement notes you can mention. I’ll keep explanations precise so you can read them out in an interview.
+
+# Full file — annotated explanation
+
+```js
+require('dotenv').config();
+```
+
+* Loads environment variables from a `.env` file into `process.env`.
+* Interview note: used to avoid hardcoding secrets (e.g., `JWT_SECRET`, `PORT`). Mention `.env` should never be committed to source control.
+
+```js
+const express = require("express");
+const app = express();
+```
+
+* Imports Express and creates an `app` instance which is the main web application object.
+* Interview note: Express provides routing, middleware support, and HTTP helpers.
+
+```js
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+```
+
+* `bcrypt`: for hashing passwords securely (one-way).
+* `jsonwebtoken` (`jwt`): for signing and verifying JWTs.
+* `cookie-parser`: parses cookies from incoming requests and attaches them to `req.cookies`.
+* `helmet`: sets helpful security-related HTTP headers (e.g., `X-Frame-Options`, `X-Content-Type-Options`).
+* Interview note: mention why each lib is chosen and security tradeoffs (e.g., cost factor for bcrypt).
+
+```js
+const JWT_SECRET = process.env.JWT_SECRET || 'change_this_secret_for_dev_only';
+const JWT_EXPIRES_IN = '1h'; // adjust as needed
+```
+
+* `JWT_SECRET`: secret used to sign/verify JWT tokens. Uses env var or a fallback string (not safe for production).
+* `JWT_EXPIRES_IN`: token lifetime; here one hour.
+* Interview note: explain secret rotation invalidates all existing tokens. In production, use strong secrets stored in a secrets manager.
+
+```js
+app.use(helmet());
+app.use(express.json());
+app.use(cookieParser());
+```
+
+* `app.use(helmet())`: apply Helmet middleware globally for extra HTTP header protections.
+* `app.use(express.json())`: built-in middleware to parse JSON request bodies and populate `req.body`.
+* `app.use(cookieParser())`: parse cookies into `req.cookies`.
+* Interview note: order matters — body parsers before routes that need `req.body`.
+
+```js
+// simple in-memory user store for demo (replace with DB in production)
+const users = new Map();
+```
+
+* `users` is a `Map` used as an in-memory user store for demo/testing.
+* Interview note: in-memory storage is ephemeral and not suitable for production; use a DB (Postgres/Mongo/etc.) and unique constraints.
+
+```js
+// create demo user: riyaz@example.com / password: Password123
+if (!users.has('riyaz@example.com')) {
+  const passwordHash = bcrypt.hashSync('Password123', 10);
+  users.set('riyaz@example.com', { email: 'riyaz@example.com', passwordHash, role: 'user' });
+}
+```
+
+* Creates a demo user if not already present.
+* `bcrypt.hashSync('Password123', 10)`: synchronously hashes the demo password with cost factor 10.
+* Interview tip: synchronous hashing blocks the event loop—acceptable in a small script but prefer `await bcrypt.hash(...)` in real apps.
+
+```js
+// helpers
+function createToken(payload) {
+  return jwt.sign(payload, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+}
+```
+
+* `createToken(payload)`: signs a JWT with provided payload (e.g., `{ email, role }`) using `JWT_SECRET` and expiry.
+* Interview note: JWT payload should avoid sensitive data (passwords); include minimal claims. You can add `iat`, `exp` are set by `jsonwebtoken`.
+
+```js
+function cookieOptions() {
+  return {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 1000, // 1 hour
+  };
+}
+```
+
+* Returns cookie options used when setting the token cookie:
+
+  * `httpOnly`: prevents JS access to cookie (mitigates XSS).
+  * `secure`: cookie only sent over HTTPS when in production.
+  * `sameSite: 'lax'`: reduces CSRF risk while allowing top-level GET navigations.
+  * `maxAge`: cookie lifetime in milliseconds.
+* Interview note: for stricter CSRF protection use `sameSite: 'strict'` or implement CSRF tokens for state-changing POSTs from browsers.
+
+```js
+// middleware
+function authenticate(req, res, next) {
+  try {
+    const token = req.cookies.token || (req.headers.authorization && req.headers.authorization.split(' ')[1]);
+    if (!token) return res.status(401).json({ error: 'Authentication required' });
+    const payload = jwt.verify(token, JWT_SECRET);
+    req.user = payload;
+    next();
+  } catch (err) {
+    return res.status(401).json({ error: 'Invalid or expired token' });
+  }
+}
+```
+
+* `authenticate`: Express middleware to verify JWT:
+
+  * Looks for token first in `req.cookies.token` (cookie) then `Authorization: Bearer <token>` header.
+  * If no token, returns `401`.
+  * `jwt.verify(token, JWT_SECRET)` verifies signature and expiry; payload is attached to `req.user`.
+  * On error (invalid signature, expired token) responds with `401`.
+* Interview notes:
+
+  * You can return more specific errors, but avoid revealing too much (e.g., “invalid signature” vs “expired”).
+  * Consider token revocation (blacklist) if you need immediate logouts or refresh-token patterns.
+
+```js
+function authorize(...allowedRoles) {
+  return (req, res, next) => {
+    if (!req.user) return res.status(401).json({ error: 'Authentication required' });
+    if (allowedRoles.length && !allowedRoles.includes(req.user.role)) {
+      return res.status(403).json({ error: 'Forbidden' });
+    }
+    next();
+  };
+}
+```
+
+* `authorize(...allowedRoles)`: factory returning middleware that enforces role-based access.
+
+  * If `allowedRoles` provided and `req.user.role` not included, returns `403 Forbidden`.
+* Interview tip: role checks are simple and useful for small apps; for complex ACLs use policy/permission systems.
+
+```js
+// Auth endpoints
+app.post('/api/auth/register', async (req, res) => {
+  const { email, password, role = 'user' } = req.body || {};
+  if (!email || !password) return res.status(400).json({ error: 'email and password required' });
+  if (users.has(email)) return res.status(409).json({ error: 'User already exists' });
+
+  const passwordHash = await bcrypt.hash(password, 10);
+  users.set(email, { email, passwordHash, role });
+  return res.status(201).json({ message: 'User registered' });
+});
+```
+
+* `POST /api/auth/register`:
+
+  * Extracts `email`, `password`, optional `role` from JSON body.
+  * Validates required fields; returns `400` if missing.
+  * `409 Conflict` if user already exists.
+  * Hashes password asynchronously and stores user in the in-memory `users` map.
+  * Returns `201 Created` on success.
+* Interview points: show understanding of HTTP status codes (400, 409, 201) and async hashing.
+
+```js
+app.post('/api/auth/login', async (req, res) => {
+  const { email, password } = req.body || {};
+  if (!email || !password) return res.status(400).json({ error: 'email and password required' });
+
+  const user = users.get(email);
+  if (!user) return res.status(401).json({ error: 'Invalid credentials' });
+
+  const match = await bcrypt.compare(password, user.passwordHash);
+  if (!match) return res.status(401).json({ error: 'Invalid credentials' });
+
+  const token = createToken({ email: user.email, role: user.role });
+  res.cookie('token', token, cookieOptions());
+  return res.json({ message: 'Logged in' });
+});
+```
+
+* `POST /api/auth/login`:
+
+  * Validate request body.
+  * Fetch user and compare password using `bcrypt.compare`.
+  * If success, create a JWT containing `email` and `role`, set it as a cookie (`token`) with `cookieOptions()`.
+  * Returns a simple JSON message.
+* Interview tip: mention you could also return the token in JSON for non-browser clients (mobile apps) but cookies are convenient for browsers.
+
+```js
+app.post('/api/auth/logout', (req, res) => {
+  res.clearCookie('token', cookieOptions());
+  return res.json({ message: 'Logged out' });
+});
+```
+
+* `POST /api/auth/logout`:
+
+  * Clears the `token` cookie (uses same options so cookie name/path matches).
+  * Returns logout confirmation.
+* Interview note: clearing cookie is client-side logout; if you use stateless JWTs, server cannot force logout unless you implement token revocation.
+
+```js
+// Protected endpoints
+app.get('/api/balance', authenticate, authorize('user', 'admin'), (req, res) => {
+  // example: only return balance for the authenticated user
+  if (req.user.email === 'riyaz@example.com') {
+    return res.json({ message: `Hello ${req.user.email}`, balance: 786 });
+  }
+  return res.json({ message: `Hello ${req.user.email}`, balance: 0 });
+});
+```
+
+* `GET /api/balance`:
+
+  * Protected by `authenticate` and `authorize('user', 'admin')`.
+  * Returns a sample balance; special case for demo user.
+* Interview note: show how middleware stacking works in Express (order: authenticate → authorize → handler).
+
+```js
+app.get('/api/admin/users', authenticate, authorize('admin'), (req, res) => {
+  // admin-only: list users (demo)
+  const list = Array.from(users.values()).map(u => ({ email: u.email, role: u.role }));
+  return res.json({ users: list });
+});
+```
+
+* `GET /api/admin/users`:
+
+  * Admin-only route to list users (demo).
+  * Converts `users` Map to a list of `{ email, role }`.
+* Interview tip: talk about paginating and not exposing password hashes or other sensitive data in responses.
+
+```js
+// error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: 'Server error' });
+});
+```
+
+* Global error-handling middleware in Express; any thrown error passed to `next(err)` will end up here.
+* Logs error server-side and returns a generic `500` to clients (avoid leaking stack traces in production).
+* Interview note: you can add environment-specific behavior — e.g., include stack trace in development.
+
+```js
+const PORT = process.env.PORT || 786;
+app.listen(PORT, () => {
+  console.log(`Server running at port ${PORT}`);
+});
+```
+
+* Reads `PORT` from environment or falls back to `786`.
+* Starts the HTTP server and logs a message.
+* Interview tip: mention readiness/liveness probes in containerized environments and graceful shutdown (handle `SIGTERM`, close DB connections) for production-grade apps.
+
+---
+
+# Short list of *improvements* / things to mention in interview
+
+1. **Persist users in a database** (Postgres, MySQL, MongoDB) with unique constraints and indexes.
+2. **Use refresh tokens** pattern if you want long sessions with short-lived access tokens. Store refresh tokens securely (HTTP-only cookie or DB) and rotate them on use.
+3. **Token revocation / blacklist** for forced logout: maintain a server-side blacklist or track token `jti` IDs.
+4. **Stronger secret management**: use Vault, AWS Secrets Manager, or environment variables injected securely. Rotate secrets carefully.
+5. **Rate-limiting and brute-force protection** (e.g., `express-rate-limit`) on auth endpoints.
+6. **Input validation**: use a library (Joi, Zod) to validate email/password format and avoid injection or bad inputs.
+7. **Password policy**: enforce strength, use bcrypt cost appropriate for environment.
+8. **HTTPS only**: ensure `secure: true` cookies in production and terminate TLS properly.
+9. **Logging & monitoring**: structured logs, error monitoring (Sentry), and metrics.
+10. **Graceful shutdown**: handle `SIGINT/SIGTERM` to close server and DB connections.
+
+---
+
+# One-liners you can say in interview (quick bullets)
+
+* “We use JWTs for stateless authentication; token signed with `JWT_SECRET` contains minimal claims like `email` and `role`.”
+* “Cookies are `httpOnly` to mitigate XSS; `sameSite: 'lax'` helps against CSRF for many flows.”
+* “We hash passwords with bcrypt; never store plain text.”
+* “`authenticate` middleware checks token from cookie or `Authorization` header and attaches `req.user` for downstream code.”
+* “Role-based access controlled using `authorize` middleware which checks `req.user.role`.”
+
+---
+
+If you want, I can:
+
+* Turn this into a **one-page printable cheat-sheet** you can bring to an interview.
+* Provide **example answers** (2–3 minute spoken version) that you can rehearse. Which would you like?
