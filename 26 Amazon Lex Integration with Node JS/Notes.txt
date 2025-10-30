@@ -1,0 +1,10 @@
+npm install @aws-sdk/client-lex-runtime-v2
+
+
+2. Configure AWS credentials
+You can provide credentials in any of these ways:
+Use AWS CLI (aws configure)
+Or use environment variables:
+    export AWS_ACCESS_KEY_ID=YOUR_KEY
+    export AWS_SECRET_ACCESS_KEY=YOUR_SECRET
+    export AWS_REGION=YOUR_REGION
