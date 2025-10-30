@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/786riyaz/NodeJS#readme",
   "dependencies": {
+    "@aws-sdk/client-lex-runtime-v2": "^3.919.0",
     "bcrypt": "^6.0.0",
     "colors": "^1.4.0",
     "cookie-parser": "^1.4.7",
