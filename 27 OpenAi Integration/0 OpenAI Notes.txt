@@ -1,0 +1,28 @@
+npm install openai express dotenv
+====================================================================================
+https://platform.openai.com/docs/overview
+https://platform.openai.com/api-keys
+====================================================================================
+POST http://localhost:5000/api/chat
+Content-Type: application/json
+Body :: 
+{
+  "prompt": "Write a short poem about JavaScript."
+}
+
+Response ::
+{
+  "reply": "JavaScript dances in the browser light..."
+}
+====================================================================================
+🔹 Stream Responses (for live typing effect)
+You can use:
+openai.chat.completions.stream({ ... })
+to stream tokens as they are generated.
+====================================================================================
+🔹 Use Other OpenAI APIs
+For example:
+Images: openai.images.generate()
+Embeddings: openai.embeddings.create()
+Speech-to-text: openai.audio.transcriptions.create()
+====================================================================================
