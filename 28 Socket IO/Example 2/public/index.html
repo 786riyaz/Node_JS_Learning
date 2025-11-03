@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Real-Time Chat App</title>
+  <style>
+    body { font-family: sans-serif; background: #f4f4f4; margin: 0; }
+    #chat { max-width: 600px; margin: 20px auto; background: white; padding: 10px; border-radius: 8px; }
+    #messages { list-style: none; padding: 0; }
+    #messages li { padding: 5px 10px; margin-bottom: 5px; border-radius: 5px; }
+    #messages .system { color: #888; font-style: italic; }
+    #form { display: flex; }
+    #input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
+    #send { padding: 10px 20px; border: none; background: #007bff; color: white; border-radius: 4px; margin-left: 5px; }
+  </style>
+</head>
+<body>
+  <div id="chat">
+    <h2>💬 Real-Time Chat</h2>
+    <ul id="messages"></ul>
+    <form id="form">
+      <input id="input" autocomplete="off" placeholder="Type a message..." />
+      <button id="send">Send</button>
+    </form>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    // Ask for username when page loads
+    const username = prompt("Enter your username:");
+    socket.emit("setUsername", username);
+
+    const form = document.getElementById("form");
+    const input = document.getElementById("input");
+    const messages = document.getElementById("messages");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      if (input.value) {
+        socket.emit("chatMessage", input.value);
+        input.value = "";
+      }
+    });
+
+    // Listen for messages
+    socket.on("chatMessage", (data) => {
+      const li = document.createElement("li");
+      li.textContent = `${data.user}: ${data.text}`;
+      messages.appendChild(li);
+    });
+
+    // Listen for system notifications
+    socket.on("notification", (msg) => {
+      const li = document.createElement("li");
+      li.textContent = msg;
+      li.classList.add("system");
+      messages.appendChild(li);
+    });
+  </script>
+</body>
+</html>
