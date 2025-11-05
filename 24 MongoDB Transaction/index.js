@@ -8,10 +8,7 @@ const app = express();
 app.use(express.json());
 
 // ✅ MongoDB connection
-mongoose.connect('mongodb://localhost:27017/schoolDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect('mongodb://localhost:27017/schoolDB')
 .then(() => console.log('✅ MongoDB connected'))
 .catch(err => console.error('❌ Connection error:', err));
 

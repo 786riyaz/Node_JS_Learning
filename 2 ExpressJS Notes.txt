@@ -1,0 +1,201 @@
+web framework
+npm install express
+===========================================================
+const express = require ('express');
+const app = express();
+app.get('', (req, res)=>{
+    res.send("Home Page");
+});
+app.get('/about', (req,res)=>{
+    res.send("About Page");
+});
+app.listen(786);
+===========================================================
+app.get('', (req, res) => {
+    res.send(`
+    <h1> This is Home Page </h1>
+    <br>
+    <a href = "/contact"> Contact Page </a>
+    `);
+})
+===========================================================
+app.get('/data', (req, res) => {
+    res.send([1,2,3,4]);
+})
+===========================================================
+app.use(express.static(public_Folder_Path));
+===========================================================
+app.listen(786, ()=>{
+    log Server Running at port 786
+})
+===========================================================
+app.get("/", (req, res) => { res.sendFile(home_file_Path); } )
+app.get("/about", (req, res) => { res.sendFile(about_file_Path); } )
+===========================================================
+app.use((req, res) => {
+    res.status(404).sendFile(`${Folder_Path}/404.html`);
+})
+===========================================================
+===========================================================
+===========================================================
+Template Engine ---- for dynamic pages --- ejs
+npm install ejs
+===========================================================
+index.js
+app.set("view engine", "ejs");
+app.get("/profile", (req, res) => {
+    const data = {
+        name:"Riyaz",
+        age:25,
+        skills:["C", "C++", "Python", "JavaScript"]
+        };
+    res.render('profile', data);
+});
+
+profile.ejs                     ----> views/profile.ejs
+<h2> Name :: <%= name %>
+<h2> Age :: <%= age %>
+<ul> <% skills.forEach ((skill) => { %>
+    <li> <%= skill &> </li>
+    <% }) %>
+    </ul>
+===========================================================
+<body>
+<%- include ('common/header'); %>
+===========================================================
+===========================================================
+===========================================================
+Middleware 
+function that executes before final request handler
+function that process request before they react the final route handler
+modifies the request and response
+logging, authentication, validation, parsing, error handling
+===========================================================
+Types :: Application Level, Router Level, Error Handling, Build-in, Third Party
+===========================================================
+const express = require ('express');
+const app = express();
+const reqFilter = (req, res, next) => {
+    if (!req.query.age) {
+        res.send("Please Provide Age");
+    } else {
+        if(req.query.age >= 18) {
+            next();
+        } else {
+            res.send("Age is less than 18");
+        }
+    }
+}
+===========================================================
+App Level Middleware
+app.use(reqFilter);
+===========================================================
+Route Level Middleware
+app.get("/users", reqFilter, (req,res) => {
+    resp.send("User Page");
+})
+===========================================================
+Routed Middleware
+const route = express.Router();
+route.use(reqFilter);
+rout.get("/users", (req,res) => {
+    res.send(.....);
+})
+app.use("/", route);
+===========================================================
+Error Handling Middleware
+===========================================================
+===========================================================
+===========================================================
+Mongo DB
+npm i mongodb
+const MongoClient = require('mongodb').MongoClient;
+const {MongoClient} = require('mongodb');
+const url = 'mongodb://localhost:27017';
+const dbname = 'E-Commerce';
+const client = new MongoClient(url);
+
+async function connectToDatabase() {
+    try{
+        let result = await client.connect();
+        Log Connected
+        const db = result.db(dbname);
+        const collection = db.collection('Products');
+        let response = await collection.find({}).toArray();
+        Log Documents response
+    } catch (err) {
+        Log Error err
+    } finally {
+        await client.close()
+    }
+}
+connectToDatabase();
+===========================================================
+let result = await collection.insertOne({...});
+if(result.acknowledged){ Log Successful}
+else { Log error}
+===========================================================
+await collection.insertMany([{...},{...},{...}])
+===========================================================
+await collection.findOne();
+await collection.findOne().toArray();
+await collection.findOne({productName:"Ideapad"});
+await collection.find({price:{$gt:500}});
+===========================================================
+await collection.updateOne(
+    {condition},
+    {$set:{....}}
+)
+
+await collection.updateMany(
+    {condition},
+    {$set:{...}}
+)
+===========================================================
+await collection.deleteOne({condition});
+await collection.deleteMany({condition});
+result.acknowledged
+result.deletedCount
+===========================================================
+===========================================================
+===========================================================
+Mongoose ---- Object Data Modeling
+npm install mongoose
+===========================================================
+const mongoose = require ('mongoose');
+mongoose.connect("mongodb://localhost:27017/E-Comm');
+const productsSchema = new mongoose.Schema({
+    productName : {type:String, required:true},
+    category:String,
+    brand:String,
+    Price:Number
+});
+
+const Products = mongoose.model("CollectionName", productsSchema);
+const newProduct = new Products({...});
+newProduct.save()
+    .then((savedData) => Log savedData)
+    .catch((err) => Log Error err)
+===========================================================
+===========================================================
+===========================================================
+npm i mysql
+const mysql = require('mysql');
+const con = mysql.createConnection({
+    host :'localhost',
+    user:'root;
+    password:'',
+    database:'E-Commerce'
+});
+
+con.connect((err)=>{
+    if(err) Log Error Connection issue
+    else { Log connection successful}
+})
+
+con.query("Select * from Products", (err,result)=>{ Log result })
+===========================================================
+===========================================================
+===========================================================
+===========================================================
+===========================================================

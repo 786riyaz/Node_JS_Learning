@@ -1,0 +1,15 @@
+Node JS is server side 
+JS is client side in browser
+======================================================================
+Different IDEs for Development ===> 
+VS Code
+Atom
+Sublime
+WebStorm
+=====================================================================
+how to use filter function
+What is the difference between "node index.js" and "node ./index.js"
+Node JS is Async Language
+
+fs module
+	unlinkSync function

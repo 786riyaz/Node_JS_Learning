@@ -1,13 +1,3 @@
-Node JS is server side 
-JS is client side in browser
-======================================================================
-Different IDEs for Development ===> 
-VS Code
-Atom
-Sublime
-WebStorm
-======================================================================
-YouTube Video Link for learning
 Node js complete tutorial in Hindi - Full Node course in one video
 https://www.youtube.com/watch?v=VrQgmNY96wo
 
@@ -64,17 +54,3 @@ https://www.youtube.com/watch?v=VrQgmNY96wo
 49.    8:17:51     PUT API with node js and MySQL
 50.    8:29:06     DELETE API with node js and MySQL
 51.    8:35:08     Node JS vs PHP
-
-Node JS in Hindi #1 what is Node | Introduction
-https://www.youtube.com/watch?v=zaLfOjNEOaQ&list=PL8p2I9GklV456iofeMKReMTvWLr7Ki9At&index=1
-https://www.youtube.com/watch?v=UE2tYTsJ-Zc&list=PL8p2I9GklV456iofeMKReMTvWLr7Ki9At&index=6
-======================================================================
-======================================================================
-======================================================================
-======================================================================
-how to use filter function
-What is the difference between "node index.js" and "node ./index.js"
-Node JS is Async Language
-
-fs module
-	unlinkSync function

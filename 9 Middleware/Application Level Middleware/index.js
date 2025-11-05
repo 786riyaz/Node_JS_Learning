@@ -6,8 +6,8 @@ const app = express();
 const reqFilter = (req, res, next) => {
     console.log("In side Middlewaare ===> reqFilter");
     if (!req.query.age) {
-        res.send("Please provide Age...");
         console.log("Age is not provided");
+        res.send("Please provide Age...");
     } else {
         console.log("Age is already Provided ::: ", req.query.age);
         if(req.query.age >= 18){

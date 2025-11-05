@@ -8,7 +8,6 @@ let counter = 0;
 event.on("countAPI", ()=>{
     counter++;
     console.log("Inside the count API Event ==> Counter :", counter);
-
 })
 
 app.get('/',(req,res)=>{

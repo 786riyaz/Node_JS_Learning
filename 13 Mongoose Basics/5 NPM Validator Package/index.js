@@ -32,8 +32,6 @@ const customerSchema = new mongoose.Schema({
     max: [120, 'Age seems unrealistic']
   },
 
-  
-
   // Optional string with trim and maxlength
   city: { 
     type: String,

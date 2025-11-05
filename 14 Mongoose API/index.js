@@ -2,7 +2,6 @@ const { ObjectId } = require("mongodb");
 const express = require("express");
 require("./config");
 const Product = require("./product");
-const { default: mongoose } = require("mongoose");
 
 const app = express();
 app.use(express.json());

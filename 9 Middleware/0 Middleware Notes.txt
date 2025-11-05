@@ -29,5 +29,5 @@ Threre are 5 types of middleware :::
 1) Application Level Middleware
 2) Router Level Middleware
 3) Error Handling Middleware
-4) Built in Middleware
-5) Third Party Middleware
+4) Built in Middleware :: static, json, text, raw, urlencoded
+5) Third Party Middleware :: cors, morgan, helmet, multer, passport

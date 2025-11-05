@@ -1,6 +1,25 @@
+NPM Validator Package ::
+In Node.js, you can use the **validator** package to validate input **before saving** to MongoDB.
+
+Website :: 
 https://www.npmjs.com/package/validator
 
+Commads to install :: 
+npm install validator
 npm i validator
+
+Example:
+const validator = require("validator");
+
+const email = "test@gmail.com";
+if (validator.isEmail(email)) {
+  console.log("Valid email");
+} else {
+  console.log("Invalid email");
+}
+
+Use this with **Mongoose Schema Validation**.
+
 
 Before ES6
 var validator = require('validator');

@@ -1,5 +1,4 @@
-npm install express nodemailer dotenv cors
-
+npm install nodemailer
 
 .env File
 SMTP_HOST=smtp.gmail.com
