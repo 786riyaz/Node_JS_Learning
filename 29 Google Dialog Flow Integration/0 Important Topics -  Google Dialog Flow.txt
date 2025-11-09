@@ -1,0 +1,8 @@
+🧠 11. Google Dialogflow
+🔹 Core Concepts
+Intents, Entities, and Contexts
+Fulfillment (webhooks)
+Integrating with web or WhatsApp
+Parameters and slot filling
+Fallback and training phrases
+Integration with Google Cloud Functions

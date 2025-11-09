@@ -1,0 +1,19 @@
+npm install dialogflow
+
+curl -X POST http://localhost:3000/message \
+     -H "Content-Type: application/json" \
+     -d '{"message":"Hi"}'
+
+
+app.post('/webhook', (req, res) => {
+  const intentName = req.body.queryResult.intent.displayName;
+
+  if (intentName === 'GetWeather') {
+    const city = req.body.queryResult.parameters['geo-city'];
+    return res.json({
+      fulfillmentText: `The weather in ${city} is sunny ☀️`,
+    });
+  }
+
+  res.json({ fulfillmentText: 'Intent not recognized.' });
+});
