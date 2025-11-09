@@ -1,0 +1,9 @@
+Twilio
+🔹 Core Concepts
+Programmable Messaging (SMS, WhatsApp)
+Voice calls and IVR setup
+TwiML (Twilio Markup Language)
+Webhook handling for inbound messages
+API usage for sending messages
+Authentication (Account SID & Auth Token)
+Rate limits and cost considerations
