@@ -1,0 +1,10 @@
+IBM Watson Assistant
+🔹 Core Concepts
+Intents, Entities, and Dialog Nodes
+Context variables
+Slots and conditions
+Integrating with backend (via Webhooks)
+Multi-turn conversations
+Disambiguation and fallback handling
+API calls (Watson Assistant API)
+Integration with websites and chat widgets

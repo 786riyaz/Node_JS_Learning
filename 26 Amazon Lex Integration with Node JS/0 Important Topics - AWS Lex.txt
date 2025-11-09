@@ -1,0 +1,9 @@
+Amazon Lex
+🔹 Core Concepts
+Intents, Slots, and Utterances
+Lambda integration for fulfillment
+Session attributes
+Error handling and confirmation prompts
+Versioning and Aliases
+Voice vs Text bots
+Integration with Amazon Connect / AWS services

@@ -1,4 +1,4 @@
-🧠 11. Google Dialogflow
+Google Dialogflow
 🔹 Core Concepts
 Intents, Entities, and Contexts
 Fulfillment (webhooks)
