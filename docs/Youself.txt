@@ -1,0 +1,18 @@
+Tell me about yourself ? 
+=====================================================================
+Sure. I’m Riyaz Khan Pathan, and I live in Danilimda, Ahmedabad.
+I’ve completed my Diploma and Bachelor’s degree in Computer Engineering from Government Engineering College, Modasa, with CGPAs of 8.9 and 8.5 respectively.
+
+During my final year, our IoT-based Smart City project won first prize, where I handled all the hardware implementation.
+
+After graduation, I joined Streebo as a Technical Consultant, where I’ve worked for around four years.
+I started as an intern working on Angular and Java-based projects like Tata AIA, and later moved into full-stack development using the MERN stack, building applications such as an Asset Management System and a Leave Management System.
+
+Later, I began developing AI-driven chatbot demos for the sales team using IBM Watson Assistant, AWS Lex, and Google DialogFlow, and due to my strong communication and mentoring skills, I was given the opportunity to train new interns.
+
+I then transitioned to the Product Team, where I worked on advanced conversational AI solutions. My key project was the Product Commerce Framework (PCF) — an AI-driven product recommendation system built with the MERN Stack, MySQL, and OpenAI models (GPT-4o).
+It used LLM-generated dynamic SQL queries to fetch products and display them in a carousel interface.
+
+I also collaborated on a Cognitive Search System using Vector Databases, Web Crawlers, and Reinforcement Learning with Human Feedback (RLHF) to improve information retrieval accuracy.
+
+Overall, I’m passionate about full-stack development, AI integration, and teaching others, and I’m now looking for an opportunity where I can apply these skills to build scalable and intelligent software solutions.

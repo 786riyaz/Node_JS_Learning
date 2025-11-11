@@ -1,35 +1,65 @@
-const express = require("express");
-const http = require("http");
-const { Server } = require("socket.io");
+import fs from "fs";
+import path from "path";
+import mammoth from "mammoth";
+import pptx2json from "pptx2json";
+import pdf from "pdf-parse"; // ✅ correct ESM import for your version
 
-const app = express();
-const server = http.createServer(app);
-const io = new Server(server);
+// PDF extraction
+async function extractPDF(filePath) {
+  const dataBuffer = fs.readFileSync(filePath);
+  const data = await pdf(dataBuffer);
+  return data.text;
+}
 
-app.use(express.static("public")); // serve frontend files
+// DOCX extraction
+async function extractDOCX(filePath) {
+  const result = await mammoth.extractRawText({ path: filePath });
+  return result.value;
+}
 
-io.on("connection", (socket) => {
-  console.log("A user connected");
-
-  // When user sends their username
-  socket.on("setUsername", (username) => {
-    socket.username = username;
-    io.emit("notification", `${username} joined the chat`);
+// PPTX extraction
+async function extractPPTX(filePath) {
+  const slides = await pptx2json.parse(filePath);
+  let text = "";
+  slides.slides.forEach((slide) => {
+    slide.texts.forEach((item) => {
+      text += item.text + "\n";
+    });
   });
+  return text;
+}
 
-  // When user sends a chat message
-  socket.on("chatMessage", (msg) => {
-    io.emit("chatMessage", { user: socket.username, text: msg });
-  });
+// Crawl and combine
+async function crawlDocuments(folderPath) {
+  const files = fs.readdirSync(folderPath);
+  let allText = "";
 
-  // When user disconnects
-  socket.on("disconnect", () => {
-    if (socket.username) {
-      io.emit("notification", `${socket.username} left the chat`);
+  for (const file of files) {
+    const fullPath = path.join(folderPath, file);
+    const ext = path.extname(file).toLowerCase();
+
+    console.log(`📂 Processing: ${file}`);
+
+    try {
+      let content = "";
+      if (ext === ".pdf") content = await extractPDF(fullPath);
+      else if (ext === ".docx") content = await extractDOCX(fullPath);
+      else if (ext === ".pptx") content = await extractPPTX(fullPath);
+      else {
+        console.log(`⚠️ Skipping unsupported file: ${file}`);
+        continue;
+      }
+
+      allText += `\n\n--- ${file} ---\n${content}`;
+    } catch (err) {
+      console.error(`❌ Error reading ${file}:`, err.message);
     }
-  });
-});
+  }
 
-server.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
-});
+  fs.writeFileSync("documents_content.txt", allText, "utf8");
+  console.log("\n✅ All document content saved to documents_content.txt");
+}
+
+// Run
+const folderPath = "./docs"; // Change if needed
+await crawlDocuments(folderPath);

@@ -1,0 +1,55 @@
+## Daily Schedule
+
+- **5:30 AM - Fajr Prayer, Gym & Morning Routine**  
+  - Wake up and perform Fajr prayer (5:30 AM).  
+  - Morning gym session (30 minutes, e.g., bodyweight exercises, cardio, or light weights).  
+  - Recite Quran (15 minutes, e.g., a page from Surah Al-Baqarah).  
+  - Quick shower and healthy breakfast (e.g., eggs, toast, or dates with milk, 15 minutes).
+
+- **6:30 AM - 9:30 AM - Personal Development & Driving**  
+  - **6:30 AM - 7:00 AM**: Car driving session (30 minutes, e.g., practice in a safe area or short errands).  
+  - **7:00 AM - 7:30 AM**: Technical learning (30 minutes, e.g., coding practice like Delta Exchange API integration or Python).  
+  - **7:30 AM - 8:00 AM**: Islamic studies or general learning (30 minutes, e.g., reading Tafsir or an online course).  
+  - **8:00 AM - 8:15 AM**: Reflective journaling (15 minutes, e.g., answer “What did I learn? What can I improve?”).  
+  - **8:15 AM - 9:30 AM**: Flexible learning or creative practice (75 minutes, e.g., hands-on coding project, prototyping website UI, or Islamic reading; include 15 minutes weekly for diverse content like a tech podcast).
+
+- **9:30 AM - 10:00 AM - Work Prep**  
+  - Set up home workspace (e.g., organize desk, check emails, prepare tools).
+
+- **10:00 AM - 1:30 PM - Work Session 1**  
+  - Work-from-home tasks (meetings, emails, focused work).  
+  - Short break at 11:30 AM (5-10 minutes, coffee or light snack).
+
+- **1:30 PM - 2:30 PM - Dhuhr Prayer & Lunch Break**  
+  - Perform Dhuhr prayer (1:30 PM).  
+  - Lunch (30-45 minutes, balanced meal with protein, carbs, veggies).
+
+- **2:30 PM - 3:00 PM - Qailulah (Nap)**  
+  - 20-30 minute power nap to boost energy and productivity.
+
+- **3:00 PM - 5:30 PM - Work Session 2**  
+  - Continue work tasks (projects, collaboration, or admin work).  
+  - Short break at 4:00 PM (5-10 minutes, stretch or hydrate).  
+  - Perform Asr prayer (5:30 PM).
+
+- **5:30 PM - 7:00 PM - Work Session 3**  
+  - Wrap up work tasks or meetings.
+
+- **7:00 PM - Maghrib Prayer & Evening Routine**  
+  - Perform Maghrib prayer (7:30 PM).  
+  - Creative problem-solving (20-30 minutes, e.g., brainstorm work solutions or sketch website ideas, 1-2 times weekly; otherwise, reading or hobby).
+
+- **8:00 PM - Isha Prayer & Family/Social Time**  
+  - Perform Isha prayer (9:00 PM).  
+  - Spend time with family or friends (45 minutes, e.g., dinner, conversation).  
+  - Weekly: Replace 30 minutes with networking (e.g., join a developer forum or contact a mentor, Sunday 8:30 PM).
+
+- **9:45 PM - Wind Down & Sleep**  
+  - Recite or reflect on Quran (10-15 minutes).  
+  - Relax (e.g., no screens, dua, or light stretching).  
+  - Sleep by 10:00 PM for 7.5 hours of rest (until 5:30 AM).
+
+## Weekly Additions
+- **Habit Tracking (Sunday, 8:00 AM - 8:15 AM)**: Review adherence to goals (e.g., gym, coding, Quran) using a simple tracker (app or notebook). Adjust strategies if needed.
+- **Diverse Content (Weekly, in 8:15 AM - 9:30 AM slot)**: Spend 15-20 minutes on a podcast, article, or book (e.g., tech trends, personal growth, or Islamic lectures) to broaden perspectives.
+- **Networking (Sunday, 8:30 PM)**: Engage with a developer community or mentor for 30 minutes to gain insights and feedback.
