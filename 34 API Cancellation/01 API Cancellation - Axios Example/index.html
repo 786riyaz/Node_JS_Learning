@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Product Search (Axios + AbortController)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 24px;
+    }
+
+    input {
+      width: 360px;
+      padding: 8px;
+      font-size: 16px;
+    }
+
+    .item {
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .meta {
+      color: #666;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Search products</h2>
+  <input id="q" placeholder="Type to search products..." autofocus />
+  <div id="results"></div>
+
+  <!-- Axios CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    (function () {
+      const input = document.getElementById('q');
+      const results = document.getElementById('results');
+
+      let debounceTimer = null;
+      let controller = null; // AbortController for the in-flight request
+
+      function render1(items) {
+        results.innerHTML = items.length
+          ? items.map(i => `<div class="item"><strong>${escapeHtml(i.name)}</strong><div class="meta">₹${i.price ?? '—'} • ${i.category ?? ''}</div></div>`).join('')
+          : '<div class="meta">No results</div>';
+      }
+      function render(items) {
+        results.innerHTML = items.length
+          ? items.map(i => `
+        <div class="item">
+          <strong>${escapeHtml(i.productName)}</strong>
+          <div class="meta">
+            Brand: ${escapeHtml(i.brandName)} <br>
+            Category: ${escapeHtml(i.category)} <br>
+            Price: ₹${i.price ?? '—'}
+          </div>
+        </div>
+      `).join('')
+          : '<div class="meta">No results</div>';
+      }
+
+
+      function escapeHtml(s) {
+        if (!s) return '';
+        return s.replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+      }
+
+      async function doSearch(q) {
+        // Cancel previous request if any
+        if (controller) {
+          controller.abort();       // abort previous axios request
+          controller = null;
+        }
+
+        if (!q) {
+          render([]);
+          return;
+        }
+
+        controller = new AbortController();
+        const url = `http://localhost:5500/api/search?q=${encodeURIComponent(q)}`;
+
+        try {
+          const resp = await axios.get(url, { signal: controller.signal, timeout: 20000 });
+          // axios returns data in resp.data
+          render(resp.data);
+        } catch (err) {
+          if (err.name === 'CanceledError' || err.name === 'AbortError') {
+            // request was cancelled — expected when user types again
+            // console.log('Cancelled:', q);
+          } else if (err.code === 'ECONNABORTED') {
+            results.innerHTML = '<div class="meta">Request timed out</div>';
+          } else {
+            console.error(err);
+            results.innerHTML = '<div class="meta">Error fetching results</div>';
+          }
+        } finally {
+          controller = null;
+        }
+      }
+
+      input.addEventListener('input', (e) => {
+        const q = e.target.value.trim();
+
+        // Debounce 300ms
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => doSearch(q), 300);
+      });
+
+      // optional: press Escape to clear
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          input.value = '';
+          render([]);
+          if (controller) { controller.abort(); controller = null; }
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>
