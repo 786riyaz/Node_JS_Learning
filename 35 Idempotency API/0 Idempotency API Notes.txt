@@ -1,0 +1,29 @@
+✅ What is Idempotence in APIs? (Interview Answer)
+
+Idempotence means:
+Calling the same API multiple times produces the same result, without changing the server state more than once.
+
+In simple terms:
+First API call → performs the action
+Next repeated API calls → do not perform the action again
+End result always stays same
+
+💡 Real-world examples:
+Pressing UPI Payment button twice → should NOT charge twice
+Clicking Place Order twice → should NOT create two orders
+Clicking Confirm Booking twice → should not create duplicate bookings
+
+🧠 Why Idempotence is Important?
+Prevents duplicate payments / orders
+Protects against network retry issues
+Ensures API safety during retries
+Improves system reliability
+
+🎯 Which HTTP Methods Are Idempotent?
+Method	    Idempotent?	    Reason
+GET	        Yes	            Multiple GETs fetch same resource
+PUT	        Yes	            Replaces resource with same data
+DELETE	    Yes	            Deleting again does nothing
+POST	    ❌ No	       Creates multiple entries
+
+So POST is NOT idempotent by default — but we can make it idempotent.
