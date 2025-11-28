@@ -7,7 +7,7 @@ const insertOne = async () => {
     // insert one document to the 'Products' collection
     let result = await collection.insertOne({ "ProductName":"Macbook Air 5", "Category":"Laptop", "Brand":"Apple", "Price":3000 })
     
-    if(result.acknowledged){
+    if(result?.acknowledged){
         console.log("Data inserted Succesfully");
     } else {
         console.error("Error While inserting Data");

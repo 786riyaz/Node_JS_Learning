@@ -10,9 +10,9 @@ const deleteOne = async () => {
     );
     console.log("Result ::", result);
 
-    if (result.acknowledged && result.deletedCount === 1) {
+    if (result?.acknowledged && result?.deletedCount === 1) {
         console.log("Single Record deleted Successfully");
-    } else if (result.acknowledged && result.deletedCount != 1){
+    } else if (result?.acknowledged && result?.deletedCount != 1){
         console.error("Data not found for the delete operation.");
     } else { 
         console.error("Error while deleting the data");

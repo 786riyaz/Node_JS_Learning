@@ -11,7 +11,7 @@ const updateMany = async () => {
     );
     console.log("Result ::", result);
 
-    if (result.acknowledged) {
+    if (result?.acknowledged) {
         console.log("Multiple Records Update Successfully");
     } else {
         console.error("Error while updating the records");

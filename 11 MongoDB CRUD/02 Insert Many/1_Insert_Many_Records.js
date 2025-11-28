@@ -11,7 +11,7 @@ const insertMany = async () => {
         { "ProductName":"I Phone 11", "Category":"Mobile", "Brand":"Apple", "Price":5000 }
     ])
     
-    if(result.acknowledged){
+    if(result?.acknowledged){
         console.log("Records inserted Succesfully");
     } else {
         console.error("Error While inserting Records");
