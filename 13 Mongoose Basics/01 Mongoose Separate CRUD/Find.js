@@ -15,6 +15,7 @@ const customerSchema = new mongoose.Schema({
   lastModified: { type: Date, default: Date.now }
 });
 
+// These all are valid model names
 // const Customer = mongoose.model('customers', customerSchema);
 // const Customer = mongoose.model('customer', customerSchema);
 // const Customer = mongoose.model('Customer', customerSchema);

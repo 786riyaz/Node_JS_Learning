@@ -1,3 +1,6 @@
+// os Module is useful to perform different operation at level of Operating System.
+// os Module is also useful for getting different information of Operating System.
+
 const os = require("os");
 
 console.log(os);
