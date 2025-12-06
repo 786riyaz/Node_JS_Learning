@@ -120,7 +120,7 @@ function authenticate(req, res, next) {
   * On error (invalid signature, expired token) responds with `401`.
 * Interview notes:
 
-  * You can return more specific errors, but avoid revealing too much (e.g., “invalid signature” vs “expired”).
+  * You can return more specific errors, but avoid revealing too much (e.g., "invalid signature" vs "expired").
   * Consider token revocation (blacklist) if you need immediate logouts or refresh-token patterns.
 
 ```js
@@ -273,11 +273,11 @@ app.listen(PORT, () => {
 
 # One-liners you can say in interview (quick bullets)
 
-* “We use JWTs for stateless authentication; token signed with `JWT_SECRET` contains minimal claims like `email` and `role`.”
-* “Cookies are `httpOnly` to mitigate XSS; `sameSite: 'lax'` helps against CSRF for many flows.”
-* “We hash passwords with bcrypt; never store plain text.”
-* “`authenticate` middleware checks token from cookie or `Authorization` header and attaches `req.user` for downstream code.”
-* “Role-based access controlled using `authorize` middleware which checks `req.user.role`.”
+* "We use JWTs for stateless authentication; token signed with `JWT_SECRET` contains minimal claims like `email` and `role`."
+* "Cookies are `httpOnly` to mitigate XSS; `sameSite: 'lax'` helps against CSRF for many flows."
+* "We hash passwords with bcrypt; never store plain text."
+* "`authenticate` middleware checks token from cookie or `Authorization` header and attaches `req.user` for downstream code."
+* "Role-based access controlled using `authorize` middleware which checks `req.user.role`."
 
 ---
 

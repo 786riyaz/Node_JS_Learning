@@ -98,5 +98,5 @@ If you need those, convert it into a normal object:
    console.log(normalObj);  // { key: "value", name: "Riyaz" }
 
 This way, you regain all prototype methods safely while keeping
-Express’s security benefits for the raw object.
+Express's security benefits for the raw object.
 */

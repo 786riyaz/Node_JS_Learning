@@ -4,7 +4,7 @@ API Cancellation means **stopping an API request before it finishes**.
 
 Think of it as:
 
-> “I sent a request, but now I don't need the response — cancel it.”
+> "I sent a request, but now I don't need the response — cancel it."
 
 This is done to avoid:
 
@@ -25,7 +25,7 @@ In frontend (React, Angular, Vue, JS), API cancellation means **stopping an ongo
 Example situations:
 
 1. User types in a search bar → sends a request → types again → old request becomes useless → **cancel the old request**.
-2. Switching between pages → previous page’s API should not update the new page’s UI.
+2. Switching between pages → previous page's API should not update the new page's UI.
 3. Auto-suggest dropdowns → cancel previous queries.
 
 ### 📌 **How It's Done**
@@ -118,8 +118,8 @@ app.get("/process", async (req, res) => {
 
 **Frontend cancellation:**
 
-> “Don't send/continue this API call; I don't need the response.”
+> "Don't send/continue this API call; I don't need the response."
 
 **Backend cancellation:**
 
-> “Client has disconnected; stop doing the work.”
+> "Client has disconnected; stop doing the work."

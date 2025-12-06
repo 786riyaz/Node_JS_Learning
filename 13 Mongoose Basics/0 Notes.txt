@@ -12,7 +12,7 @@ Main Uses of Mongoose:
 ✅ Easy data modeling & object mapping in applications.
 
 ✅ 3️⃣ What is the mongodb npm module?
-It’s the official MongoDB driver for Node.js.
+It's the official MongoDB driver for Node.js.
 Provides low-level, direct access to MongoDB, including connecting to the database, performing CRUD operations, managing indexes, etc.
 No built-in schema or model abstractions.
 

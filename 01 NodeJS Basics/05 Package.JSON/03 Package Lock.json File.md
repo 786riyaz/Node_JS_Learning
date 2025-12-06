@@ -44,7 +44,7 @@ Just reads lock file and installs.
 
 All developers get **exact same versions**, preventing:
 
-* “Works on my machine” bugs
+* "Works on my machine" bugs
 * Production version mismatches
 * Random package updates breaking code
 
@@ -87,7 +87,7 @@ npm will:
 
 If a new minor version has a bug, your project may break:
 
-➡ “Yesterday it worked, today everything stopped working.”
+➡ "Yesterday it worked, today everything stopped working."
 
 ### 4️⃣ Slower installation
 

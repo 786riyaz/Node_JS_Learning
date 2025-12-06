@@ -18,7 +18,7 @@ When a request comes in:
 
 ✅ In short:
 Middleware = Functions that process requests before they reach the final route handler.
-They’re used for logging, authentication, validation, parsing, error handling, etc.
+They're used for logging, authentication, validation, parsing, error handling, etc.
 =====================================================================
 =====================================================================
 =====================================================================

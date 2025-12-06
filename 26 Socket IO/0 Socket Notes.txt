@@ -5,7 +5,7 @@ It allows your website or app to instantly send and receive messages without ref
 Example in Real Life
 Imagine a chat app:
 When you send a message, it appears instantly for both users — no page reload.
-That’s Socket.IO in action.
+That's Socket.IO in action.
 
 Other examples:
 Live dashboards (real-time data updates)
@@ -17,7 +17,7 @@ Collaborative tools (like Google Docs)
 How it Works (Conceptually)
 Normally, web apps use HTTP — which is request → response based.
 That means:
-The client requests, and the server responds — and that’s it.
+The client requests, and the server responds — and that's it.
 Socket.IO, on the other hand, uses WebSockets under the hood:
 Once connected, both client and server can keep sending messages anytime — like a phone call instead of letters.
 

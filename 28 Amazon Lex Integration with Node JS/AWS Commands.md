@@ -1,6 +1,6 @@
-Absolutely 🔥 — here’s a **complete, ready-to-use AWS Command-Line (CLI) Cheat Sheet** for everything we’ve used and discussed so far for your **Amazon Lex + Node.js chatbot integration**.
+Absolutely 🔥 — here's a **complete, ready-to-use AWS Command-Line (CLI) Cheat Sheet** for everything we've used and discussed so far for your **Amazon Lex + Node.js chatbot integration**.
 
-I’ll organize them by purpose so you can keep this as your **reference file**.
+I'll organize them by purpose so you can keep this as your **reference file**.
 
 ---
 
@@ -30,7 +30,7 @@ aws --version
 aws configure
 ```
 
-### Verify identity (to confirm you’re logged in correctly)
+### Verify identity (to confirm you're logged in correctly)
 
 ```bash
 aws sts get-caller-identity
@@ -148,7 +148,7 @@ aws iam get-policy --policy-arn arn:aws:iam::309594616250:policy/LexRecognizeTex
 
 ## 🧰 **5️⃣ Useful IAM + Lex Policy Template**
 
-Here’s the JSON we used to grant minimal permissions for your Node.js bot:
+Here's the JSON we used to grant minimal permissions for your Node.js bot:
 
 ```json
 {

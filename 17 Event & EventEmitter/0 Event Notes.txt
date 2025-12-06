@@ -15,7 +15,7 @@ EventEmitter is a class from the events module in Node.js.
 It allows you to:
 Emit (trigger) events → using .emit()
 Listen for (subscribe to) events → using .on() or .addListener()
-Basically, it’s like a radio:
+Basically, it's like a radio:
 emit() = radio station broadcasting a signal.
 on() = radio listener tuning in to that signal.
 

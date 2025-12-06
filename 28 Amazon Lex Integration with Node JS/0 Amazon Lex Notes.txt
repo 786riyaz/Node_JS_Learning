@@ -16,7 +16,7 @@ AWS Integration
 
 ## 🧩 Step 1 — ✅ Backend (you already have this)
 
-You’ve already done this part — your `server.js` (or `index.js`) correctly connects to your Lex bot and replies to `/chat` POST requests.
+You've already done this part — your `server.js` (or `index.js`) correctly connects to your Lex bot and replies to `/chat` POST requests.
 Keep that code exactly as it is.
 
 ---
@@ -48,7 +48,7 @@ app.use(express.json());
 const JWT_SECRET = process.env.JWT_SECRET || "your_secret_here";
 const client = new LexRuntimeV2Client({ region: "ap-southeast-2" });
 
-// Demo user (in production, you’d use DB)
+// Demo user (in production, you'd use DB)
 const user = { username: "admin", password: await bcrypt.hash("123456", 10) };
 
 // --- Login route ---
@@ -170,7 +170,7 @@ Create a new file `index.html` in your project root:
 </html>
 ```
 
-Run your Node server and open `index.html` in the browser — you’ll see a simple chat box.
+Run your Node server and open `index.html` in the browser — you'll see a simple chat box.
 
 ---
 

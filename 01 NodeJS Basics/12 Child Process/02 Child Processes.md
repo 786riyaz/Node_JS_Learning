@@ -49,7 +49,7 @@ exec("ls -la", (err, stdout, stderr) => {
 
 ### ✔ Interview Question
 
-**Q: Why shouldn’t we use exec() for large logs?**
+**Q: Why shouldn't we use exec() for large logs?**
 ✔ Because `exec()` buffers output in memory → if output is too large, it causes memory overflow.
 
 ---
@@ -167,7 +167,7 @@ process.on("message", msg => {
 Fork is safer when:
 
 * Memory isolation is required
-* Crashes in worker shouldn’t affect main thread
+* Crashes in worker shouldn't affect main thread
 
 ---
 
