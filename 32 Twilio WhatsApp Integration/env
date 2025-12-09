@@ -1,0 +1,7 @@
+PORT=1234
+
+# Twilio Configuration
+TWILIO_ACCOUNT_SID=123123qweqwe123123qweqwe123123qw
+TWILIO_AUTH_TOKEN=123123qweqwe123123qweqwe123123qw
+TWILIO_WHATSAPP_NUMBER=whatsapp:+14123123123   # Twilio sandbox number
+MY_WHATSAPP_NUMBER=whatsapp:+919999999999      # Your verified number

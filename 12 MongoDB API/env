@@ -1,0 +1,7 @@
+PORT=786
+
+# MongoDB Connection URLs
+# Local MongoDB
+DB_URL="mongodb://localhost:27017/DatabaseName"
+DB_URL="mongodb+srv://userName:passWord@mongoAtlasName.ahpe3pk.mongodb.net/?retryWrites=true&w=majority&appName=MongoAtlasName"
+DB_URL="mongodb+srv://userName:passWord@mongoAtlasName.ahpe3pk.mongodb.net/DatabaseName?retryWrites=true&w=majority&appName=MongoAtlasName"

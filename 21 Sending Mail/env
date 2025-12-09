@@ -1,0 +1,17 @@
+PORT=786
+
+# # Gmail SMTP over STARTTLS
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
+SMTP_SECURE=false
+
+# Your authenticated Gmail account
+SMTP_USER=moh.riyazpathan@gmail.com
+SMTP_PASS=abcd abcd abcd abcd
+
+# From/reply-to headers (keep them as your Gmail identity)
+SENDER_EMAIL="moh.riyazpathan@gmail.com"
+REPLY_TO=moh.riyazpathan@gmail.com
+
+# Optional: a default recipient for quick testing (you can also omit this)
+DEFAULT_TO=moh.riyazpathan@outlook.com
