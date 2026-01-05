@@ -1,0 +1,61 @@
+﻿* Model.create(docs, options) - create one or many documents with validation and middleware.[1][2][3]
+* new Model(doc).save(options) - insert if isNew, otherwise sends a minimal update with full validation and save middleware.[2][4]
+
+Read (query builders return a Query)
+* Model.find(filter, projection, options) - find many.[5][1]
+* Model.findOne(filter, projection, options) - find first match.[5][1]
+* Model.findById(id, projection, options) - shorthand for findOne by _id.[1]
+* Model.exists(filter) - check for existence.[1]
+* Model.countDocuments(filter) - count matching docs.[1]
+* Model.estimatedDocumentCount() - fast collection estimate.[1]
+* Model.distinct(field, filter) - unique values for a path.[1]
+* Model.aggregate(pipeline, options) - run aggregation pipeline.[1]
+* Model.findOneAndFind variants usually return a doc:
+o findOneAndUpdate(filter, update, options)[1]
+o findOneAndReplace(filter, replacement, options)[1]
+o findOneAndDelete(filter, options)[1]
+o findOneAndRemove(filter, options)[1]
+o findByIdAndUpdate(id, update, options)[1]
+o findByIdAndDelete(id, options)[1]
+o findByIdAndRemove(id, options)[1]
+
+Update (bulk-style; do not run save() middleware)
+* Model.updateOne(filter, update, options) - first match, apply update; use runValidators for schema validation.[2][1]
+* Model.updateMany(filter, update, options) - many matches.[2][1]
+* Model.replaceOne(filter, replacement, options) - replace entire document.[1]
+* Model.bulkWrite(operations, options) - batched writes.[1]
+
+Delete
+* Model.deleteOne(filter, options) - delete first match.[1]
+* Model.deleteMany(filter, options) - delete many.[1]
+* Model.remove(filter) - legacy; prefer deleteOne/deleteMany.[1]
+
+Indexes and utilities
+* Model.ensureIndexes() / Model.createIndexes() - build indexes.[1]
+* Model.syncIndexes() - sync declared indexes with DB.[1]
+* Model.listIndexes() - list indexes.[1]
+* Model.discriminator(name, schema, options) - add discriminator model.[1]
+* Model.hydrate(obj) - convert plain object to document without DB fetch.[1]
+* Model.startSession() - start MongoDB session/transactions.[1]
+* Model.watch(pipeline, options) - change streams.[1]
+
+Document instance methods (on a retrieved or new doc)
+* doc.save(options) - insert or minimal update with full validation and save middleware.[4][2]
+* doc.updateOne(update, options) - updates this doc by _id; does not run save middleware; use runValidators if needed.[4][2]
+* doc.deleteOne(options) - remove this doc.[1]
+* doc.validate(options) / doc.validateSync() - run validators.[4][2]
+* doc.toObject(options) / doc.toJSON(options) - serialization helpers.[4]
+* doc.populate(paths) - populate refs on the document.[1]
+* doc.$isNew / doc.isModified(path) / doc.markModified(path) - change tracking.[4]
+
+Key behavioral notes
+* save() runs full validation and save middleware; updateOne()/findOneAndUpdate() do not run save middleware and only run validators if runValidators: true.[2][1]
+* findByIdAndUpdate(id, ...) is shorthand for findOneAndUpdate({ _id: id }, ...).[1]
+* Version key (__v) increments on save(); it does not auto-increment on update() family unless manually handled.[6]
+* create() and save() run validators by default; updateOne()/updateMany() require runValidators to enforce schema rules.[3][2]
+
+If a quick "most-used" subset helps, these are the common go-tos:
+* Create: Model.create, new Model().save[4][1]
+* Read: find, findOne, findById[5][1]
+* Update: updateOne, updateMany, findOneAndUpdate, findByIdAndUpdate[2][1]
+* Delete: deleteOne, deleteMany, findOneAndDelete, findByIdAndDelete[1]

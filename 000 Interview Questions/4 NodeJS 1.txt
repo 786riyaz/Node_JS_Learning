@@ -1,0 +1,385 @@
+## Runtime Basics
+
+Question : 1 : What is Node.js?
+Answer : Node.js is a cross-platform JavaScript runtime built on the V8 engine for building server-side and network applications.
+
+Question : 2 : Why is Node.js considered non-blocking?
+Answer : Node.js uses an event loop with asynchronous I/O so long-running operations do not block the single main thread.
+
+Question : 3 : What is the Node.js event loop?
+Answer : The event loop orchestrates phases like timers, I/O callbacks, check, and close, running microtasks between phases to process asynchronous work.
+
+Question : 4 : How can a basic HTTP server be created?
+Answer : Use the core http module’s createServer or a framework like Express to handle requests and send responses.
+
+Question : 5 : What is the process object used for?
+Answer : The global process object exposes info and control for the running process, including env vars, pid, cwd, and signal handling.
+
+Question : 6 : How are environment variables accessed in Node?
+Answer : Configuration is typically read from process.env and supplied via the host environment or a config loader.
+
+Question : 7 : How can blocking the event loop be avoided?
+Answer : Prefer asynchronous APIs and offload CPU-bound work to worker_threads or child processes to prevent request stalls.
+
+Question : 8 : Does Node support Promises and async/await?
+Answer : Yes, many core APIs provide promise variants enabling async/await for clear asynchronous control flow.
+
+Question : 9 : What is the difference between process.nextTick and setImmediate?
+Answer : nextTick queues microtasks to run before the next event loop phase, while setImmediate runs callbacks in the check phase after poll.
+
+Question : 10 : How are timers scheduled in Node.js?
+Answer : setTimeout and setInterval callbacks run during the timers phase, subject to event loop timing and system delays.
+
+### Streams and Buffers
+
+Question : 11 : What are streams in Node.js?
+Answer : Streams are abstract interfaces for processing data incrementally, which improves memory efficiency for I/O.
+
+Question : 12 : What are the main stream types?
+Answer : Readable, Writable, Duplex, and Transform streams support different data flow and transformation patterns.
+
+Question : 13 : What is backpressure in streams?
+Answer : Backpressure occurs when the consumer cannot process data as fast as the producer, managed via write() return values and ‘drain’ events.
+
+Question : 14 : How are streams connected?
+Answer : Use readable.pipe(writable) to connect sources and destinations with automatic backpressure handling.
+
+Question : 15 : What is a Buffer in Node.js?
+Answer : Buffer is a fixed-length byte array for binary data operations, enabling efficient handling outside the V8 heap.
+
+Question : 16 : How should Buffers be created safely?
+Answer : Use Buffer.from for known data and Buffer.alloc for zero-initialized buffers to prevent uninitialized memory exposure.
+
+Question : 17 : What encodings do Buffers support?
+Answer : Common encodings include ‘utf8’, ‘base64’, and ‘hex’, converted via Buffer.from and buffer.toString.
+
+Question : 18 : What is objectMode in streams?
+Answer : objectMode allows streams to read or write arbitrary JavaScript values rather than raw bytes.
+
+Question : 19 : How is backpressure handled correctly when writing?
+Answer : Check writable.write()’s boolean return and wait for the ‘drain’ event before resuming heavy writes.
+
+Question : 20 : What are pipeline and finished utilities for?
+Answer : stream.pipeline simplifies piping with robust error propagation and cleanup, while stream.finished detects completion of a stream.
+
+### Core Networking and HTTP
+
+Question : 21 : How can outbound HTTP requests be made without libraries?
+Answer : Use http.request or https.request to craft and send requests, handling response events for data and end.
+
+Question : 22 : What modern API is recommended for URL parsing?
+Answer : The WHATWG URL class provides a robust API for parsing, constructing, and formatting URLs.
+
+Question : 23 : How does the dns module differ between lookup and resolve?
+Answer : dns.lookup uses OS facilities and respects host configuration, while dns.resolve queries DNS servers directly.
+
+Question : 24 : How is HTTPS served in Node.js?
+Answer : Use https.createServer with key and cert options to establish TLS and handle secure requests.
+
+Question : 25 : How are compression streams used?
+Answer : The zlib module provides transform streams like createGzip and createGunzip for compressing and decompressing data.
+
+### Files, Path, and Events
+
+Question : 26 : How can files be processed efficiently?
+Answer : Use fs.createReadStream and fs.createWriteStream to process data in chunks and reduce memory usage.
+
+Question : 27 : What does the path module provide?
+Answer : Utilities for path normalization, joining, and resolution across platforms to avoid manual string handling.
+
+Question : 28 : What is EventEmitter used for?
+Answer : EventEmitter underpins many Node APIs and custom modules, enabling event-driven programming patterns.
+
+Question : 29 : How should stream errors be handled?
+Answer : Always listen for ‘error’ events to prevent crashes and to perform necessary cleanup.
+
+Question : 30 : How can multiple Buffers be merged?
+Answer : Use Buffer.concat([...buffers]) to combine multiple Buffer instances into one.
+
+### Modules and Loaders
+
+Question : 31 : What does require() do in CommonJS?
+Answer : require() loads and executes modules, caching by resolved filename to speed subsequent imports.
+
+Question : 32 : How are ES modules enabled in Node?
+Answer : Use “type”: “module” in package.json or .mjs extensions to use import/export syntax.
+
+Question : 33 : How does Node’s module resolution work?
+Answer : Node resolves files, directory indexes, and traverses node_modules upward from the requiring file.
+
+Question : 34 : What CommonJS globals are available?
+Answer : __dirname, __filename, and global are available in CommonJS modules for file and global context.
+
+Question : 35 : What is the difference between process.cwd() and __dirname?
+Answer : process.cwd() returns the current working directory, which may differ from a module’s directory path in __dirname.
+
+### Child Processes and Workers
+
+Question : 36 : What is the child_process module?
+Answer : It provides spawn, exec, execFile, and fork to launch and manage external processes.
+
+Question : 37 : When to use spawn vs exec?
+Answer : Use spawn for streaming output and large data, and exec when buffering a small command’s output suffices.
+
+Question : 38 : What does fork() provide beyond spawn?
+Answer : fork() launches a Node subprocess with an IPC channel for structured parent-child messaging.
+
+Question : 39 : How does IPC with forked processes work?
+Answer : Use process.send in the child and ’message’ events on both sides to exchange JSON-serializable messages.
+
+Question : 40 : What are worker threads used for?
+Answer : worker_threads run JavaScript in parallel threads to offload CPU-bound tasks without blocking the event loop.
+
+Question : 41 : How do worker threads differ from child processes?
+Answer : Workers are in-process threads that can share memory, while child processes are separate OS processes communicating via IPC.
+
+Question : 42 : How can data be shared with workers?
+Answer : Transfer ArrayBuffer instances or use SharedArrayBuffer for shared memory between threads.
+
+Question : 43 : How are workers terminated?
+Answer : Call worker.terminate() from the parent to stop a worker thread cleanly when work completes.
+
+Question : 44 : How do workers receive messages?
+Answer : In a worker, use parentPort.on('message', handler) to process messages sent by the parent.
+
+### Clustering and Scaling
+
+Question : 45 : What is the cluster module?
+Answer : cluster enables multi-process scaling by forking workers that share server ports across CPU cores.
+
+Question : 46 : How is load distributed in a cluster?
+Answer : The primary process accepts connections and distributes them among workers, often via round-robin scheduling.
+
+Question : 47 : How can cluster resiliency be improved?
+Answer : Listen for worker ‘exit’ events and respawn workers to maintain capacity and availability.
+
+Question : 48 : Can cluster scheduling be configured?
+Answer : cluster.schedulingPolicy can set round-robin or OS scheduling strategies for connection distribution.
+
+### Crypto and Security
+
+Question : 49 : What does the crypto module provide?
+Answer : Hashing, HMAC, cipher/decipher, and key operations for building secure features in applications.
+
+Question : 50 : How are TLS servers configured?
+Answer : Provide key and cert (and optionally ca) to https.createServer to establish encrypted HTTP connections.
+
+### Express Fundamentals
+
+Question : 51 : What is Express?
+Answer : Express is a minimal, flexible web framework for building HTTP APIs and web apps on Node.js.
+
+Question : 52 : What is Express middleware?
+Answer : Middleware are functions with (req, res, next) that can modify requests/responses or end the cycle before passing control.
+
+Question : 53 : How does Express routing work?
+Answer : Define method-specific handlers like app.get('/path', handler) mapping requests to controller logic.
+
+Question : 54 : How are errors handled in Express?
+Answer : Use an error-handling middleware with four parameters (err, req, res, next) to centralize error responses.
+
+Question : 55 : How is JSON request parsing enabled?
+Answer : Register express.json() and express.urlencoded() to populate req.body from JSON and form payloads.
+
+Question : 56 : How are routers organized in Express?
+Answer : express.Router enables modular, mountable route groups for cleaner structure and separation of concerns.
+
+Question : 57 : How are static files served in Express?
+Answer : Use express.static(directory) to serve assets such as images, CSS, and client-side JavaScript.
+
+Question : 58 : How are view engines used?
+Answer : Configure a templating engine like Pug or EJS to render dynamic HTML via res.render.
+
+Question : 59 : Why does middleware order matter?
+Answer : Middleware runs in registration order, so placement affects parsing, auth, logging, and error handling flow.
+
+Question : 60 : How are status and headers set on responses?
+Answer : Call res.status(code) and res.set(headerName, value) before sending or JSON-encoding the response.
+
+Question : 61 : How are JSON responses sent?
+Answer : Use res.json(data) to send objects with the application/json Content-Type, handling serialization for you.
+
+Question : 62 : How are route parameters defined and accessed?
+Answer : Use paths like /users/:id and read values from req.params inside handlers.
+
+Question : 63 : How are query parameters accessed?
+Answer : Read parsed query string values from req.query for filtering, pagination, and selection.
+
+Question : 64 : How is an Express server closed gracefully?
+Answer : app.listen returns an HTTP server instance whose close() method stops accepting new connections.
+
+Question : 65 : What is the “Hello world” in Express?
+Answer : A minimal app uses express(), app.get('/', handler), and app.listen(port) to serve a simple response.
+
+Question : 66 : How is a REST API built in Express?
+Answer : Combine routers, middleware, and JSON handlers for CRUD endpoints using express.json() and method-specific routes.
+
+### Package Management and Scripts
+
+Question : 67 : What is package.json used for?
+Answer : It defines project metadata, dependencies, scripts, and module type configuration for Node applications.
+
+Question : 68 : What are npm scripts?
+Answer : The scripts field maps names to shell commands run via npm run, including lifecycle hooks for automation.
+
+Question : 69 : What are common npm script shorthands?
+Answer : npm start and npm test can be run without the run keyword, invoking the corresponding scripts.
+
+Question : 70 : How are dependencies managed with semver?
+Answer : Version ranges like ^ and ~ control acceptable updates for dependencies and devDependencies.
+
+Question : 71 : How can scripts be chained or composed?
+Answer : Chain with \&\& and call other scripts using npm run <name> for reusable workflows.
+
+Question : 72 : How is Node installed with npm?
+Answer : Official installers include npm with Node, and IDEs like VS Code provide integrated Node workflows.
+
+Question : 73 : What is npm?
+Answer : npm is the default package manager for Node, used to install, run, and publish packages from the registry.
+
+### Practical HTTP and Server Control
+
+Question : 74 : How are request bodies read without Express?
+Answer : Listen to ‘data’ and ‘end’ on the IncomingMessage stream to assemble the payload manually.
+
+Question : 75 : How are large uploads handled efficiently?
+Answer : Use streaming to process data incrementally, avoiding buffering entire bodies into memory.
+
+Question : 76 : What is writable.cork() used for?
+Answer : cork() batches writes to optimize throughput, and uncork() flushes them to the destination.
+
+Question : 77 : What does highWaterMark control?
+Answer : highWaterMark sets internal buffer thresholds for backpressure and flow control in streams.
+
+### Timers and Scheduling Nuances
+
+Question : 78 : When does setImmediate execute?
+Answer : It runs during the check phase after poll, making it suitable for I/O-bound callback ordering.
+
+Question : 79 : What are typical use cases for nextTick?
+Answer : Deferring callbacks to run before the next event loop phase for quick follow-up microtasks.
+
+### Diagnostics and Tooling
+
+Question : 80 : How is Node debugging supported in VS Code?
+Answer : VS Code provides breakpoints, watches, call stacks, and variable inspection for Node apps.
+
+Question : 81 : Does Node provide a REPL?
+Answer : Yes, the repl module offers an interactive shell for evaluating JavaScript in the Node environment.
+
+Question : 82 : Where are the official Node APIs documented?
+Answer : The Node API reference documents core modules like http, fs, path, stream, buffer, child_process, cluster, and worker_threads.
+
+### Servers, Shutdown, and Signals
+
+Question : 83 : What are typical exit codes?
+Answer : An exit code of 0 indicates success, while non-zero values represent different error conditions.
+
+Question : 84 : How are process signals handled for graceful shutdown?
+Answer : Listen for SIGINT and SIGTERM to close servers, stop accepting new work, and finalize cleanup.
+
+Question : 85 : How is an HTTPS server configured at a high level?
+Answer : Provide TLS credentials via key and cert to https.createServer and route requests similarly to HTTP.
+
+### URLs, DNS, and Networking Details
+
+Question : 86 : Why prefer the WHATWG URL over legacy APIs?
+Answer : The URL class provides a robust, standards-aligned API that avoids quirks of legacy parsers.
+
+Question : 87 : What are the main differences between dns.lookup and dns.resolve?
+Answer : lookup uses the OS resolver and may apply hosts files, whereas resolve queries configured DNS servers directly.
+
+### Module Patterns and Caching
+
+Question : 88 : How does module caching work?
+Answer : Modules loaded via require are cached by resolved path, and subsequent requires return the cached exports.
+
+Question : 89 : Can CommonJS imports be destructured?
+Answer : Yes, pattern like const { readFile } = require('fs') selects specific API members from a module.
+
+### Compression and Binary Data
+
+Question : 90 : How are gzip operations performed?
+Answer : Use zlib.createGzip as a Transform stream and pipe data through for compression.
+
+Question : 91 : What does Buffer.alloc(size) guarantee?
+Answer : It allocates a zero-filled Buffer of the specified length, preventing uninitialized memory exposure.
+
+### HTTP Client/Server Essentials
+
+Question : 92 : What are core steps to issue an HTTP request?
+Answer : Create a request with http.request, write or end the body, and handle ‘response’ and data events.
+
+Question : 93 : How are request bodies parsed in Express before routes?
+Answer : Register express.json() and urlencoded parsers prior to handlers that rely on req.body to ensure it’s populated.
+
+### Express Routing and Structure
+
+Question : 94 : How can middleware be scoped to a path?
+Answer : app.use('/api', middleware) mounts it only for routes under that base path.
+
+Question : 95 : How is router-level middleware applied?
+Answer : router.use(fn) runs middleware for all routes in a router, enabling local concerns like auth or logging.
+
+Question : 96 : How can routes be modularized?
+Answer : Split features into express.Router modules and mount them in the main app for separation and reuse.
+
+### Cluster vs Worker_Threads vs Child_Process
+
+Question : 97 : When should cluster be preferred over worker_threads?
+Answer : Use cluster for scaling networked servers across CPU cores, and worker_threads for parallel CPU-bound tasks within one process.
+
+Question : 98 : When should child_process be used over workers?
+Answer : Use child_process to run external commands or isolate crashes at the OS process level, while workers are best for in-process parallelism.
+
+### Developer Workflow and Installation
+
+Question : 99 : How is Node installation verified?
+Answer : Run node --version and npm --version to confirm the runtime and package manager are available.
+
+Question : 100 : What are common ways to get Node and npm?
+Answer : Use official installers or version managers, with npm bundled by default in standard Node distributions.
+
+### Final Express Patterns
+
+Question : 101 : How are headers and status codes managed in Express?
+Answer : Use res.status(code) to set status and res.set(name, value) to control response headers before sending data.
+
+Question : 102 : How does Express send JSON succinctly?
+Answer : res.json(value) serializes and sets Content-Type automatically for API responses.
+
+Question : 103 : What is the minimal pattern for a “Hello World” server in Express?
+Answer : Initialize express(), define app.get('/', handler) that sends text, and call app.listen(port).
+
+Question : 104 : What components form a typical Express REST API?
+Answer : Versioned routes, middleware (parsing, CORS, auth), controllers, and error handling with JSON responses.
+
+Question : 105 : How can an HTTP server be shut down gracefully?
+Answer : Hold the server from app.listen and call server.close(), then wait for ‘close’ before exiting.
+
+Question : 106 : How do query strings map into Express handlers?
+Answer : Values are parsed into req.query, useful for pagination, sorting, and filtering in controllers.
+
+Question : 107 : How are dynamic IDs handled in routes?
+Answer : Define params like /items/:id and read req.params.id to perform specific lookups.
+
+Question : 108 : Why is middleware order a common pitfall?
+Answer : Misordered parsers, auth checks, or error handlers can break request flow or cause incorrect responses.
+
+Question : 109 : What is the role of express.static?
+Answer : It serves files from a directory as static assets with proper caching and path resolution.
+
+Question : 110 : How are view templates integrated if needed?
+Answer : Configure a view engine and call res.render(view, model) to generate HTML from templates.
+
+Question : 111 : How can routers be mounted under a base path?
+Answer : app.use('/v1/users', usersRouter) scopes all contained routes under the /v1/users prefix.
+
+Question : 112 : What is an Express error-first handler signature?
+Answer : function(err, req, res, next) is recognized as an error middleware by Express to centralize error responses.
+
+Question : 113 : How are JSON payloads enabled in modern Express without body-parser?
+Answer : express.json() and express.urlencoded() are built-in and replace separate body-parser usage for common cases.
+
+Question : 114 : How is a CRUD API skeleton typically structured?
+Answer : Define routes for create/read/update/delete, validate input in middleware, and send typed JSON responses with proper status codes.

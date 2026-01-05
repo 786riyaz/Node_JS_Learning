@@ -1,0 +1,308 @@
+Express.js is a minimal and flexible Node.js web application framework that simplifies building web and mobile applications, REST APIs, and real-time services. Based on comprehensive research, I've compiled a curated list of 100 top interview questions with descriptive answers, categorized by difficulty level. These draw from reliable sources and focus on key concepts like middleware, routing, error handling, and advanced integrations. Questions are selected for relevance to roles like backend or full-stack developer, aligning with your background in Node.js, Express.js, and API development.
+
+Basic Express.js Interview Questions
+
+1.	What is Express.js?
+Express.js is a minimal and flexible Node.js web application framework that provides features for building web and mobile applications, simplifying server-side development with routing, middleware, and HTTP utilities.
+
+2.	How does Express.js relate to Node.js?
+Express.js is built on Node.js, acting as a framework to simplify tasks like routing and middleware, while Node.js provides the runtime environment for executing JavaScript on the server.
+
+
+3.	What is the default port for an Express.js application?
+Express.js has no fixed default port; developers commonly use port 3000 by convention, but any port can be specified when starting the server.
+
+4.	What is middleware in Express.js?
+Middleware functions access the request (req), response (res), and next objects, allowing code execution, request/response modification, or ending the request-response cycle.
+
+5.	What is the role of next() in middleware?
+The next() function passes control to the next middleware in the stack; if not called, the request hangs; if called, it proceeds to the next handler.
+
+6.	What is routing in Express.js?
+Routing defines how endpoints (URIs) respond to client requests, mapping URLs to specific code handlers.
+
+7.	Difference between app.use() and app.get()?
+app.use() mounts middleware for all requests, while app.get() handles only GET requests for a specific route.
+
+8.	Differentiate between Node.js and Express.js.
+Node.js is a runtime for server-side JavaScript; Express.js is a framework on top of Node.js for simplified web app development, APIs, and routing.
+
+9.	Mention key features of Express.js.
+Features include routing, middleware support, HTTP methods, static file serving, and security enhancements.
+
+10.	What are popular alternatives to Express.js?
+Alternatives include Koa.js, Hapi.js, Sails.js, and Fastify.
+
+11.	Which tools integrate with Express.js?
+Databases like MongoDB, MySQL; template engines like EJS, Pug; authentication like Passport.js; logging like Morgan.
+
+12.	What is a .env file used for?
+It stores sensitive information like passwords or database strings in key-value pairs, keeping them secure and out of source code.
+
+13.	What are JWTs?
+JSON Web Tokens are used for authentication, containing a header, payload, and signature to verify user access to resources.
+
+14.	Create a simple middleware for user validation.
+A middleware function checks if a user exists in req.user; if not, it returns a 401 error; otherwise, it calls next().
+
+15.	What is Bcrypt used for?
+Bcrypt hashes passwords securely, making them resistant to brute-force and rainbow table attacks.
+
+16.	Why separate the Express app and server?
+Separation improves modularity, testing, reusability, configuration management, and scalability.
+
+17.	What is ESLint?
+ESLint is a linting tool for detecting incorrect patterns in JavaScript code to improve quality and consistency.
+
+18.	Define the test pyramid concept.
+It represents test distribution: most unit tests at the base, fewer integration tests in the middle, and minimal end-to-end tests at the top.
+
+19.	Differentiate between res.send() and res.json().
+res.send() sends any response type; res.json() specifically sends JSON-formatted responses.
+
+20.	What is scaffolding in Express.js?
+Scaffolding generates a basic project structure automatically to speed up setup and ensure consistency.
+
+21.	How do you install the Express application generator?
+Use npm install -g express-generator to install it globally.
+
+22.	What is Yeoman and how to install it?
+Yeoman is a scaffolding tool; install with npm install -g yo, then add generators like npm install -g generator-express.
+
+23.	What is CORS in Express.js?
+CORS enables cross-origin resource sharing by setting HTTP headers to control domain access.
+
+24.	What are built-in middlewares?
+Examples include express.json() for JSON parsing and express.static() for serving files.
+
+25.	How do you configure properties in Express.js?
+Use app.set(name, value) to set application properties like view engine.
+
+26.	Which template engines does Express support?
+Any engine following the (path, locals, callback) signature, such as Pug or EJS.
+
+27.	Methods for debugging in Express.js?
+Use console.log, Node Inspector, VS Code Debugger, or the debug module.
+
+28.	Name databases that integrate with Express.js.
+MongoDB, MySQL, PostgreSQL, SQLite, Oracle.
+
+29.	How do you render plain HTML in Express.js?
+Use res.send() for inline HTML or res.sendFile() for file-based HTML.
+
+30.	What is the use of response.cookie()?
+It sets cookies in the HTTP response for storing user data or sessions.
+
+31.	When does a cross-origin resource fail?
+Due to missing CORS headers, mismatched origins, restricted methods, or no credentials.
+
+32.	What is the Pug template engine?
+Pug renders dynamic HTML using indentation-based syntax for server-side templates.
+
+33.	What is sanitizing input in Express.js?
+It cleans user input to prevent attacks like XSS or SQL injection.
+
+34.	How to generate a skeleton Express.js app?
+Install express-generator, run express my-app, then npm install and npm start.
+
+35.	How to secure Express.js applications?
+Use Helmet.js, sanitize inputs, enable HTTPS, and implement rate limiting.
+
+Intermediate Express.js Interview Questions
+36.	What are the types of middlewares?
+Application-level, router-level, error-handling, built-in, and third-party.
+
+37.	List built-in middleware functions.
+express.json, express.static, express.urlencoded, express.raw, express.text.
+
+38.	Mention third-party middlewares.
+body-parser, cors, morgan, helmet, express-session, passport.
+
+39.	When is application-level middleware used?
+For global tasks like logging or authentication on every request via app.use().
+
+40.	Explain router-level middleware.
+Specific to a router instance, applied only to routes handled by that router.
+
+41.	Best practices to secure Express.js?
+Update dependencies, use Helmet, set secure headers, enable HTTPS, secure database access.
+
+42.	What is express.router()?
+It creates a new router object for handling requests modularly.
+
+43.	Types of HTTP requests?
+GET (read), POST (create), PUT (update), PATCH (partial update), DELETE (remove).
+
+44.	Do other MVC frameworks support scaffolding?
+Yes, like Ruby on Rails, Django, Laravel, CakePHP.
+
+45.	Arguments in an Express.js route handler?
+req (request), res (response), next (callback to next middleware).
+
+46.	How to handle errors in Express.js?
+Use next() to pass errors; add error-handling middleware for centralized handling.
+
+47.	Difference between traditional server and Express.js server?
+Traditional uses multi-threaded blocking I/O; Express.js is single-threaded non-blocking for faster performance.
+
+48.	Purpose of next() in Express.js?
+Passes control to the next middleware or route; without it, the cycle may terminate.
+
+49.	Difference between app.route() and app.use()?
+app.route() defines multiple methods for one path; app.use() mounts middleware globally or for routes.
+
+50.	What is dynamic routing in Express.js?
+Uses parameters (e.g., /users/:id) to create flexible routes accessing dynamic data.
+
+51.	How to serve static files?
+Use express.static middleware with the root directory.
+
+52.	Use of app.use() in Express.js?
+Adds middleware functions globally or to specific paths.
+
+53.	How to handle asynchronous operations in Express.js?
+Use callbacks, promises, or async/await for tasks like API calls or database operations.
+
+54.	Explain custom middleware implementation.
+Define a function with req, res, next; e.g., for logging or authentication.
+
+55.	How to manage routes effectively?
+Use express.Router() to group related routes for better organization.
+
+56.	Purpose of process.env.NODE_ENV?
+Indicates the environment (development, production) to optimize behavior.
+
+57.	How to implement file uploads?
+Use middleware like multer to process and access files via req.file.
+
+58.	What is the REPL in Node.js context for Express?
+Read-Eval-Print-Loop for interactive testing, useful in Express development.
+
+59.	Difference between fork() and spawn() in Node.js?
+fork() creates a new V8 instance; spawn() launches processes without it.
+
+60.	What is the buffer class?
+Stores raw data outside the V8 heap, compatible with binary data.
+
+Advanced Express.js Interview Questions
+61.	How to handle errors gracefully?
+Use error-handling middleware with (err, req, res, next) for centralized responses.
+
+62.	Role of a router in Express.js?
+Organizes routes and middleware into modular mini-apps for maintainability.
+
+63.	How to process command-line arguments?
+Access via process.argv array, starting from index 2.
+
+64.	Why use assert in Node.js?
+For writing effective tests in Express.js applications.
+
+65.	Why is Express.js used?
+For building reliable web apps with its popularity and community support.
+
+66.	Use of connect module?
+Handles middleware like error-handling, cookies, and sessions.
+
+67.	Difference between front-end and back-end?
+Front-end focuses on client-side; back-end on server-side, both key for apps.
+
+68.	What are LTS releases of Node.js?
+Long-term support versions stable for 30 months, ideal for production.
+
+69.	How to scale an Express.js app for high traffic?
+Use clustering, load balancing, and caching strategies.
+
+70.	Troubleshoot a performance issue in Express.js.
+Profile with tools like New Relic, check middleware, optimize queries.
+
+71.	Implement real-time notifications.
+Use Server-Sent Events or WebSockets for one-way or bidirectional communication.
+
+72.	Custom protocol handlers in Express.js?
+Create middleware for specific content types and protocols.
+
+73.	Performance monitoring in Express.js?
+Use APM tools and custom metrics for response times.
+
+74.	Database migration in Express.js?
+Use tools like Knex.js for schema management and rollbacks.
+
+75.	Custom validation and sanitization?
+Implement middleware with libraries like Joi for input rules.
+
+76.	Data enrichment pipelines?
+Use middleware to add metadata like user context.
+
+77.	Custom security middleware?
+Add CSRF protection, XSS prevention, and rate limiting.
+
+78.	Graceful error recovery?
+Implement circuit breakers and retries with exponential backoff.
+
+79.	Custom metrics collection?
+Track KPIs via middleware integrated with analytics platforms.
+
+80.	Content delivery optimization?
+Use edge caching and CDNs for global performance.
+
+81.	Advanced data synchronization?
+Implement conflict resolution with timestamps or versioning.
+
+82.	Custom communication protocols?
+Use message queuing like RabbitMQ for reliable delivery.
+
+83.	Performance optimization?
+Profile CPU/memory and optimize resource usage.
+
+84.	Custom development tools?
+Build debugging utilities and CLI tools.
+
+85.	Advanced internationalization?
+Use i18n libraries for multi-language support.
+
+86.	API gateway patterns?
+Integrate service mesh for microservices routing.
+
+87.	Machine learning integration?
+Connect to AI services like TensorFlow.js.
+
+88.	Blockchain integration?
+Use Web3 libraries for cryptocurrency features.
+
+89.	DevOps automation?
+Implement infrastructure as code with tools like Terraform.
+
+90.	Data analytics dashboards?
+Integrate with BI tools for real-time insights.
+
+91.	Content management?
+Build CMS features with database integrations.
+
+92.	E-commerce features?
+Add payment processing with Stripe.
+
+93.	Real-time multiplayer gaming?
+Use Socket.io for synchronization.
+
+94.	IoT device management?
+Process sensor data with MQTT.
+
+95.	Social media integration?
+Add OAuth for community features.
+
+96.	Healthcare data management?
+Ensure HIPAA compliance and secure storage.
+
+97.	Education systems?
+Build LMS with user progress tracking.
+
+98.	Financial services?
+Implement secure trading platforms.
+
+99.	Supply chain management?
+Track logistics with real-time updates.
+
+100.	Environmental monitoring?
+Process sensor data for sustainability tracking.
+
+If you need more details on any question or code examples, let me know—drawing from your Node.js interview prep experience, these align well with practical API development scenarios.
