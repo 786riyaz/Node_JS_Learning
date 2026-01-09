@@ -1,5 +1,4 @@
 ## Runtime Basics
-
 Question : 1 : What is Node.js?
 Answer : Node.js is a cross-platform JavaScript runtime built on the V8 engine for building server-side and network applications.
 
@@ -31,7 +30,6 @@ Question : 10 : How are timers scheduled in Node.js?
 Answer : setTimeout and setInterval callbacks run during the timers phase, subject to event loop timing and system delays.
 
 ### Streams and Buffers
-
 Question : 11 : What are streams in Node.js?
 Answer : Streams are abstract interfaces for processing data incrementally, which improves memory efficiency for I/O.
 
@@ -63,7 +61,6 @@ Question : 20 : What are pipeline and finished utilities for?
 Answer : stream.pipeline simplifies piping with robust error propagation and cleanup, while stream.finished detects completion of a stream.
 
 ### Core Networking and HTTP
-
 Question : 21 : How can outbound HTTP requests be made without libraries?
 Answer : Use http.request or https.request to craft and send requests, handling response events for data and end.
 
@@ -80,7 +77,6 @@ Question : 25 : How are compression streams used?
 Answer : The zlib module provides transform streams like createGzip and createGunzip for compressing and decompressing data.
 
 ### Files, Path, and Events
-
 Question : 26 : How can files be processed efficiently?
 Answer : Use fs.createReadStream and fs.createWriteStream to process data in chunks and reduce memory usage.
 
@@ -97,7 +93,6 @@ Question : 30 : How can multiple Buffers be merged?
 Answer : Use Buffer.concat([...buffers]) to combine multiple Buffer instances into one.
 
 ### Modules and Loaders
-
 Question : 31 : What does require() do in CommonJS?
 Answer : require() loads and executes modules, caching by resolved filename to speed subsequent imports.
 
@@ -114,7 +109,6 @@ Question : 35 : What is the difference between process.cwd() and __dirname?
 Answer : process.cwd() returns the current working directory, which may differ from a module’s directory path in __dirname.
 
 ### Child Processes and Workers
-
 Question : 36 : What is the child_process module?
 Answer : It provides spawn, exec, execFile, and fork to launch and manage external processes.
 
@@ -143,7 +137,6 @@ Question : 44 : How do workers receive messages?
 Answer : In a worker, use parentPort.on('message', handler) to process messages sent by the parent.
 
 ### Clustering and Scaling
-
 Question : 45 : What is the cluster module?
 Answer : cluster enables multi-process scaling by forking workers that share server ports across CPU cores.
 
