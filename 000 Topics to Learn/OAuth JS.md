@@ -269,17 +269,3 @@ Now you can extract:
 | ⭐⭐⭐ Advanced    | Manual OAuth flow implementation               |
 | ⭐⭐⭐⭐ Expert     | JWT verification, refresh token rotation, PKCE |
 
----
-
-# Want Me to Build You Something?
-
-I can generate:
-
-✔️ **Full OAuth project folder** (ready to run)
-✔️ OAuth with **GitHub, Google, Facebook, Discord, Instagram**
-✔️ OAuth with **JWT backend API**
-✔️ OAuth in **TypeScript**
-✔️ OAuth + React frontend + Express backend
-✔️ OAuth + PKCE (high security, mobile apps)
-
-Just tell me what you want next 🔨🤖🔧

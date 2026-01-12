@@ -139,17 +139,3 @@ Use alternatives when:
 * You need a modern token-based architecture with refresh tokens
 
 For Express apps with sessions, Passport is still great ✔️
-
----
-
-# Want a custom tutorial?
-
-I can generate:
-
-✅ A full project folder
-✅ Passport + JWT example
-✅ Passport + Google OAuth
-✅ TypeScript version
-✅ Fastify + Passport example
-
-Just tell me what you want!

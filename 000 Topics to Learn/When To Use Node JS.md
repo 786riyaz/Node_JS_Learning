@@ -181,13 +181,3 @@ Node.js shines whenever the workload is:
 | Machine learning training   | Poor GPU handling      |
 | System-level software       | Not low-level          |
 | Real-time hard constraints  | GC pauses break timing |
-
----
-
-# 💬 If you want, I can also help you choose:
-
-* The right language for your project
-* The best architecture (Node + something else)
-* When to combine Node.js with Python, Rust, or Go
-
-Would you like examples of **when Node.js is ideal** vs **where Python/Go/Rust are better**?
