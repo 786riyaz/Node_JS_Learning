@@ -1,10 +1,12 @@
 Node.js (Backend Runtime)
+
 🔹 Core Concepts
 Event loop, non-blocking I/O, single-threaded model
 CommonJS vs ES Modules
 NPM and package.json
-Streams and buffers
 File system operations
+Streams and buffers
+
 🔹 Express.js (most used framework)
 Middleware concept and types
 Route handling and parameter passing
@@ -12,6 +14,7 @@ Request & Response lifecycle
 Error handling middleware
 REST API structure
 Using body-parser, helmet, cors, morgan, express.json()
+
 🔹 Advanced
 JWT Authentication
 Async/await, Promises
