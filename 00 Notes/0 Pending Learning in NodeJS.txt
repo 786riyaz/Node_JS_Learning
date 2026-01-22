@@ -1,4 +1,3 @@
-pending 
 How to fetch documents (Records) from multiple collection(Table) in Mongo DB
 How to fetch Records from multiple Table in MySQL
 

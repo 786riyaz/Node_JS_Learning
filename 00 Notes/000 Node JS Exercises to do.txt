@@ -1,0 +1,20 @@
+video stream node application
+Web Worker Example 
+Worker Thread Example with explanation
+Polyfils Example
+Prototype example
+WebSocket with Socket io
+Payment Module (RazorPay and Stripe)
+
+
+security ka concept complete karna he 
+	helmet, rate limiter, nginx, load balancer, https server, mutex, axios, OAuth
+	authentication and authorization
+
+    
+What can we do if a token is expire after 30 seconds
+nodejs call stack and event loop with javascript visulizer :: Doubt
+
+axios
+mutex
+
