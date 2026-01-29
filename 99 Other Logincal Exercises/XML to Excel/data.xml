@@ -1,0 +1,12 @@
+<root>
+  <item>
+    <id>1</id>
+    <name>John Doe</name>
+    <age>28</age>
+  </item>
+  <item>
+    <id>2</id>
+    <name>Jane Smith</name>
+    <age>34</age>
+  </item>
+</root>
