@@ -1,0 +1,70 @@
+***NodeJS***
+multer
+What is helmet
+long poling example
+
+Enable Gzip/Brotli in Node.js
+CDN
+
+axios
+Cron Job
+
+install and uninstall package
+installing a particular versoin of package
+dev dependencies
+npm i nodemon --save-dev
+npm i nodemon -g
+
+script in package.json
+How to create NPM Package
+
+app.use(express.json())
+app.use(express.urlencoded({extended : true}));
+
+Exercise for EJS
+complete exercise with EJS
+res.redirect("/")
+BCrypt
+cookie parser
+figlet
+oneline joke
+
+multer
+	enctype= multipart/form-data
+	crypto to set file name
+	require ==> diskStorage ==> export upload variable
+
+What is error first function with example
+
+const dbgr = require("debug") ("development:mongoose")
+dbgr("Connected !!!")
+export DEBUG = development:*
+export DEBUG = 
+
+config.get("MONGODB_URI")
+export NODE_ENV = development
+process.env.NODE_ENV = 
+
+joy package for Mongoose 
+JWT payload with large data
+JWT HS 256 and RS 256
+
+server.on("request", (req) => {
+pre in mongoose
+controller abortController and signal
+exoressSession
+app.use(flash())
+req.flash("error", "You Need to login first")
+======================================================
+*** JavaScript ***
+Destructuring in JS
+async await
+======================================================
+*** MongoDB ***
+Data association in MongoDB
+populate method with find
+sharding
+======================================================
+*** React ***
+React Router
+What is strict Mode
