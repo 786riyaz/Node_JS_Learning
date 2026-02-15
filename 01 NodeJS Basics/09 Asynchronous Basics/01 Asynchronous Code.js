@@ -9,5 +9,6 @@ console.log("Third statement");
 /* Output
 First statement
 Third statement
+
 Second statement                <=== This Statement Prints after 2 seconds
 */
