@@ -1,0 +1,299 @@
+1) Q: What is Express.js?
+A: Express.js is a fast, unopinionated, minimalist web framework for Node.js that provides routing, middleware, HTTP helpers, and view engine integration to build APIs and web apps efficiently.[^1]
+
+2) Q: How is an Express application created?
+A: Create an app by importing the express module and calling express(), which returns a request handler function compatible with Node’s HTTP servers.[^1]
+
+3) Q: What are the core responsibilities of the app object?
+A: The app handles routing via app.METHOD, configures middleware with app.use, renders views with app.render/app.engine, and manages application settings.[^1]
+
+4) Q: What changed from Express 4 to Express 5?
+A: Express 5 removes deprecated APIs, updates signatures like res.redirect(status, url), adjusts route path syntax, and improves promise rejection handling.[^2][^3][^4]
+
+5) Q: What Node.js version is required for Express 5?
+A: Express 5 requires Node.js 18 or higher.[^5][^6][^7]
+
+6) Q: How does routing work in Express?
+A: Routes map HTTP methods and paths to handlers using app.METHOD(path, ...handlers), supporting many HTTP verbs as defined in the API.[^1]
+
+7) Q: What is middleware in Express?
+A: Middleware are functions with signature (req, res, next) that can read/modify the request or response or delegate to the next handler, with error handlers using (err, req, res, next).[^8][^1]
+
+8) Q: How does middleware order affect behavior?
+A: Middleware runs in the order registered; place general middleware first and error-handling middleware after routes to capture downstream errors.[^9][^8]
+
+9) Q: What is express.Router and why use it?
+A: express.Router creates modular, mountable route handlers with options like caseSensitive, strict, and mergeParams to structure large apps.[^1]
+
+10) Q: What is the difference between app.use and app.METHOD?
+A: app.use mounts middleware for all methods at a path prefix, while app.METHOD defines handlers for specific HTTP methods on a path.[^1]
+
+11) Q: How do route parameters work?
+A: Define params in paths like /users/:id, access them via req.params, and centralize validation with app.param(name, callback).[^1]
+
+12) Q: How is query string data accessed?
+A: Query data is available on req.query; in Express 5 it’s a getter and uses the simple parser by default.[^2][^1]
+
+13) Q: How are request bodies parsed in Express 5?
+A: Use built-ins express.json, express.urlencoded, express.text, or express.raw; req.body is undefined unless an appropriate parser is mounted.[^2][^1]
+
+14) Q: What’s new about express.urlencoded in v5?
+A: The extended option defaults to false and nested parsing depth is limited by default, with options to configure as needed.[^3][^2]
+
+15) Q: How is JSON payload parsing configured?
+A: app.use(express.json({ limit, strict, type, verify })) configures limits and content-type checks; the default limit is typically 100kb.[^1]
+
+16) Q: How does Express handle errors by default?
+A: The default error handler sets status, hides stack traces in production, and emits either a stack or generic message depending on NODE_ENV.[^8]
+
+17) Q: How to write a custom error-handling middleware?
+A: Define (err, req, res, next), register after routes, and delegate with next(err) when headers were already sent.[^8]
+
+18) Q: How are asynchronous errors handled in Express 5?
+A: Rejected promises returned by handlers automatically call next(err), simplifying async/await error propagation.[^4][^2]
+
+19) Q: What does next('route') do?
+A: It skips the remaining handlers for the current route and continues matching subsequent routes.[^1]
+
+20) Q: What changed about res.redirect in v5?
+A: The signature is now res.redirect(status, url) and the 'back' magic string was removed in favor of req.get('Referrer') || '/'. [^2][^3]
+
+21) Q: How should response status be set in v5?
+A: Use res.status(code) before res.json/res.send, and prefer res.sendStatus(code) for sending only a status.[^3]
+
+22) Q: What is the difference between res.send and res.json?
+A: res.send can send various types, while res.json sets JSON content-type and stringifies objects appropriately.[^1]
+
+23) Q: How are static files served?
+A: Use express.static(root, options) with caching, ETags, directory index, and header customization via options.[^1]
+
+24) Q: What changed about dotfiles in static serving for v5?
+A: express.static defaults dotfiles behavior to ignore, requiring explicit configuration for dot-directories like .well-known.[^2]
+
+25) Q: How to serve a .well-known directory safely in v5?
+A: Mount explicitly with app.use('/.well-known', express.static('public/.well-known', { dotfiles: 'allow' })) before general static middleware.[^2]
+
+26) Q: How do route path patterns change in v5?
+A: Optional segments use braces, wildcards must be named or wrapped, and regex-like characters in paths must be escaped.[^4][^2]
+
+27) Q: How to chain handlers for the same path?
+A: Use app.route(path).get(...).post(...) to centralize multi-verb route logic.[^1]
+
+28) Q: What does app.all do?
+A: app.all(path, ...handlers) registers handlers for all HTTP methods at a path, useful for auth gates or shared logic.[^1]
+
+29) Q: How to use multiple callbacks for one route?
+A: Pass multiple middleware/handlers to app.METHOD(path, h1, h2, ...) and call next to pass control along.[^1]
+
+30) Q: What is res.sendFile in v5?
+A: res.sendFile replaces deprecated res.sendfile and relies on mime-types for content detection, altering some defaults.[^3]
+
+31) Q: How to configure template engines?
+A: Register with app.engine(ext, callback), set app.set('view engine', 'pug') and app.set('views', dirs), then use res.render/app.render.[^1]
+
+32) Q: How does app.render differ from res.render?
+A: app.render generates HTML via callback without sending, while res.render renders and sends the response.[^1]
+
+33) Q: What changed about res.render in v5?
+A: res.render enforces asynchronous behavior for all view engines to align with the recommended interface.[^2]
+
+34) Q: What is app.locals vs res.locals?
+A: app.locals are app-wide for view defaults; res.locals are per-request variables available to views for that response.[^1]
+
+35) Q: How are application settings managed?
+A: Use app.set(name, value) and app.get(name) for env, caseSensitiveRouting, strict routing, trust proxy, and view options.[^1]
+
+36) Q: How to run in production mode?
+A: Set NODE_ENV=production to enable production behavior like hiding stack traces and enabling view caching.[^8][^1]
+
+37) Q: What is trust proxy?
+A: trust proxy signals Express is behind a reverse proxy and to respect X-Forwarded-* headers; it’s configurable via booleans, strings, or arrays.[^1]
+
+38) Q: How are sub-apps mounted?
+A: Create additional express() instances and mount with app.use('/admin', admin), accessible via app.mountpath.[^1]
+
+39) Q: How to detect mount events?
+A: Listen for 'mount' on a sub-app with app.on('mount', callback(parent)) for parent-dependent setup.[^1]
+
+40) Q: How to get the canonical mount path of an app?
+A: Use app.path() for the mount path; req.baseUrl reflects the matched URL path for a request.[^1]
+
+41) Q: What is req.app and res.app?
+A: req.app and res.app reference the application instance, allowing access to app-level settings and helpers from handlers.[^1]
+
+42) Q: What is app.router in v5?
+A: app.router is an in-built router instance created on first access and can be used similarly to express.Router.[^1]
+
+43) Q: How to centralize route parameter validation?
+A: Use app.param(name, callback) to intercept and validate or load resources for parameters like :user.[^1]
+
+44) Q: How often does a param callback run?
+A: Param callbacks run once per request for a given parameter, even if multiple routes match it.[^1]
+
+45) Q: What happened to req.param in v5?
+A: req.param(name) was removed; use req.params, req.body, or req.query explicitly for clarity and safety.[^3][^2]
+
+46) Q: How does HEAD handling work?
+A: app.get also handles HEAD requests if a matching app.head is not defined.[^1]
+
+47) Q: How to start servers and what does app.listen return?
+A: app.listen wraps http.Server.listen and returns an http.Server; the app itself is a function suitable for http/https servers.[^1]
+
+48) Q: What changed about app.listen error handling in v5?
+A: A provided callback now receives server error events so they can be handled there, rather than throwing.[^2]
+
+49) Q: How to implement a 404 handler?
+A: Add a final non-error middleware that sends 404 when no route matched, placed before the error handler.[^8]
+
+50) Q: How to reduce server fingerprinting?
+A: Disable X-Powered-By and provide custom 404/error responses to reduce predictable signatures.[^1]
+
+51) Q: Why use Helmet in production?
+A: Helmet sets security headers like CSP, HSTS, and X-Content-Type-Options to mitigate common web vulnerabilities.[^1]
+
+52) Q: How to install and use Helmet?
+A: Install with npm install helmet and register with app.use(helmet()) near the top of the middleware stack.[^1]
+
+53) Q: Why is TLS recommended?
+A: TLS encrypts in-transit data and is commonly terminated at a reverse proxy such as Nginx in production.[^1]
+
+54) Q: What are secure cookie practices?
+A: Use secure, httpOnly, proper domain/path, and expiry; avoid default names and choose storage strategy based on sensitivity.[^1]
+
+55) Q: What is the difference between express-session and cookie-session?
+A: express-session stores session data server-side with an ID in the cookie; cookie-session stores the entire session client-side and suits small, non-sensitive data.[^1]
+
+56) Q: How to prevent brute-force on login?
+A: Apply rate limiting at critical endpoints based on failures per IP and per user using libraries that implement these policies.[^1]
+
+57) Q: How to ensure dependency security?
+A: Run npm audit regularly, update vulnerable packages, and consider continuous tools like Snyk in CI.[^1]
+
+58) Q: Why not trust user input?
+A: Always validate and sanitize to prevent open redirects, XSS, and injections; validate URLs before redirecting.[^1]
+
+59) Q: How to avoid open redirects?
+A: Validate target hosts and reject untrusted or invalid URLs instead of blindly redirecting.[^1]
+
+60) Q: How does the default error handler present errors?
+A: It sets res.statusCode from err.status/err.statusCode, assigns a status message, shows a stack in development, and includes err.headers when present.[^8]
+
+61) Q: What happens if next(err) is called after headers are sent?
+A: The default handler closes the connection and fails the request; custom handlers should delegate to next(err) if res.headersSent is true.[^8]
+
+62) Q: Where should error-handling middleware be placed?
+A: Define error-handling middleware after all app.use and route declarations to catch upstream errors.[^9][^8]
+
+63) Q: How to log and distinguish client errors?
+A: Use layered error middleware patterns to log, detect XHR, and send appropriate responses.[^8]
+
+64) Q: How to catch sync vs async errors?
+A: Synchronous throws are caught automatically; async callbacks must call next(err), with Express 5 auto-forwarding promise rejections.[^2][^8]
+
+65) Q: How to handle promise-based errors without try/catch?
+A: Return a promise and use .catch(next), or use async functions in Express 5 where rejections are forwarded automatically.[^2][^8]
+
+66) Q: What does express.static do when a file is not found?
+A: It calls next() by default rather than sending a 404, enabling stacking and fallbacks.[^1]
+
+67) Q: How to control static cache behavior?
+A: Configure etag, lastModified, maxAge, and immutable to tune caching semantics and performance.[^1]
+
+68) Q: How to add custom headers when serving static files?
+A: Provide setHeaders(res, path, stat) in express.static options to set headers per file synchronously.[^1]
+
+69) Q: How to map multiple static directories?
+A: Use multiple app.use(express.static(...)) calls or rely on fallthrough behavior to try alternate directories.[^1]
+
+70) Q: What is app.set('env') used for?
+A: The env setting reflects environment mode, typically set via NODE_ENV, affecting error output and template caching.[^8][^1]
+
+71) Q: What are caseSensitive and strict routing?
+A: caseSensitive treats /Foo and /foo as different; strict differentiates /foo and /foo/ when enabled.[^1]
+
+72) Q: How to mount a router with merged params?
+A: Use express.Router({ mergeParams: true }) so child routers can access params defined in parent routes.[^1]
+
+73) Q: How to handle multiple route patterns in v5 without regex?
+A: Provide an array of strings to app.get([...paths], handler) instead of inline regex patterns.[^4][^2]
+
+74) Q: How are wildcards specified in v5?
+A: Use named wildcards like /*splat or wrap root matches as /{*splat}, replacing anonymous * usage.[^2]
+
+75) Q: How to migrate deprecated method signatures automatically?
+A: Use codemods such as npx @expressjs/codemod upgrade or v4-deprecated-signatures and magic-redirect transforms.[^3][^2]
+
+76) Q: What changed about MIME handling in v5?
+A: MIME type detection for sendFile/static uses mime-types, affecting some defaults like .js and .json.[^3]
+
+77) Q: What is the behavior of req.body in v5?
+A: req.body is undefined without a body parser, whereas Express 4 sometimes returned an empty object.[^2]
+
+78) Q: What changed about req.host in v5?
+A: req.host now preserves the port number if present, correcting Express 4 behavior that stripped it.[^2]
+
+79) Q: How does req.query behave in v5?
+A: req.query is a getter and the default parser is simple to reduce ambiguity and complexity.[^2]
+
+80) Q: How to skip 404 short-circuiting for static?
+A: Keep fallthrough: true for layered static directories, or set fallthrough: false for strict single-directory mounts.[^1]
+
+81) Q: How to enable immutable caching for static assets?
+A: Set immutable: true with a nonzero maxAge in express.static options to reduce conditional requests.[^1]
+
+82) Q: How to control URL-encoded parsing safety?
+A: Configure express.urlencoded with extended, limit, parameterLimit, and depth to balance features and abuse prevention.[^2][^1]
+
+83) Q: How are JSON parse behaviors tuned?
+A: express.json accepts strict, type, limit, and verify hooks to constrain content and inspect raw buffers as needed.[^1]
+
+84) Q: How to handle HEAD if not explicitly defined?
+A: If app.head(path) is not set, app.get(path) will also answer HEAD automatically.[^1]
+
+85) Q: How to share variables with views safely?
+A: Use app.locals for global helpers and res.locals for per-request data, avoiding user-controlled keys that might affect engines.[^1]
+
+86) Q: How to safely redirect back in v5 without 'back'?
+A: Replace the magic string with res.redirect(req.get('Referrer') || '/'), validating referrers when needed. [^2][^3]
+
+87) Q: What’s the correct order for production middleware?
+A: Initialize trust proxy and security middleware early, then static and parsers, routes after, followed by 404 and error handlers at the end.[^8][^1]
+
+88) Q: How to disable X-Powered-By?
+A: Call app.disable('x-powered-by') to remove the header and reduce casual server fingerprinting.[^1]
+
+89) Q: Why is input validation essential in Express apps?
+A: It prevents vulnerabilities like open redirects, XSS, and injection, ensuring downstream code receives trusted shapes and types.[^1]
+
+90) Q: How does the default error handler set response details?
+A: It derives status from err.status/err.statusCode, sets statusMessage, uses stack vs generic messages by env, and includes err.headers if provided.[^8]
+
+91) Q: Where can rate limiting be applied effectively?
+A: Apply at critical endpoints like authentication routes, limiting repeated failures per IP and per user over windows.[^1]
+
+92) Q: What is the recommended TLS setup for Express apps?
+A: Terminate TLS at a reverse proxy such as Nginx and follow recommended server configurations for robust ciphers and certificates.[^1]
+
+93) Q: How to define custom 404 and error messages?
+A: Add a final app.use((req,res)=>res.status(404).send(...)) and an error handler app.use((err,req,res,next)=>{...}) to control output and reduce fingerprints.[^8][^1]
+
+94) Q: How to mount multiple paths to a sub-app?
+A: Provide an array of mount paths like app.use(['/admin', '/manager'], admin) so the same sub-app handles more than one base path.[^1]
+
+95) Q: How to mount a router under a nested sub-app?
+A: Mount a child app or router under a sub-app path using admin.use('/secret', secret) to create hierarchies.[^1]
+
+96) Q: How to gate a set of routes behind auth?
+A: Use app.all('/api/*', requireAuthentication) placed before protected routes to enforce access control.[^1]
+
+97) Q: How to centralize multi-verb route logic?
+A: Use app.route(path).all(sharedSetup).get(getHandler).post(postHandler) for shared logic and verb-specific handlers.[^1]
+
+98) Q: How do app.enable/disable relate to app.set?
+A: app.enable(name) and app.disable(name) are shorthand for app.set(name, true/false) for boolean settings like 'trust proxy'.[^1]
+
+99) Q: How to debug routers in v5 after express:* changes?
+A: Use DEBUG=express:,router,router:route,router:layer to match v4 verbosity since namespaces changed.[^2]
+
+100) Q: What’s the simplest starter example?
+A: Create an app with express(), define app.get('/', (req,res)=>res.send('hello world')), and listen on a port with app.listen(3000).[^1]
