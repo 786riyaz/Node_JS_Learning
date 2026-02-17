@@ -1,302 +1,302 @@
 Question 1 : What is Node.js and where can you use it?
-Answer : Node.js is an open-source, cross-platform JavaScript runtime environment and library used to run web applications outside the client's browser. It excels in creating server-side web applications, particularly data-intensive ones, due to its asynchronous, event-driven model. Common uses include real-time web applications (e.g., chats), network applications, general-purpose apps, distributed systems, video streaming sites, and Internet of Things (IoT) projects.[^1]
+Answer : Node.js is an open-source, cross-platform JavaScript runtime environment and library used to run web applications outside the client's browser. It excels in creating server-side web applications, particularly data-intensive ones, due to its asynchronous, event-driven model. Common uses include real-time web applications (e.g., chats), network applications, general-purpose apps, distributed systems, video streaming sites, and Internet of Things (IoT) projects.
 
 Question 2 : Why use Node.js?
-Answer : Node.js is favored for building scalable network programs because it is generally fast, rarely blocks execution, offers unified programming with JavaScript, supports asynchronous operations, and provides great concurrency. It handles multiple requests efficiently without waiting for APIs to return data, making it ideal for high-performance applications.[^1]
+Answer : Node.js is favored for building scalable network programs because it is generally fast, rarely blocks execution, offers unified programming with JavaScript, supports asynchronous operations, and provides great concurrency. It handles multiple requests efficiently without waiting for APIs to return data, making it ideal for high-performance applications.
 
 Question 3 : How does Node.js work?
-Answer : Node.js processes client requests by adding them to an Event Queue. The Event Loop checks and handles simple (non-blocking) requests immediately, returning responses. For complex requests, it assigns a thread from the Thread Pool to access external resources (e.g., databases), then sends the response back via the Event Loop once complete. This single-threaded, event-driven model ensures non-blocking I/O.[^1]
+Answer : Node.js processes client requests by adding them to an Event Queue. The Event Loop checks and handles simple (non-blocking) requests immediately, returning responses. For complex requests, it assigns a thread from the Thread Pool to access external resources (e.g., databases), then sends the response back via the Event Loop once complete. This single-threaded, event-driven model ensures non-blocking I/O.
 
 Question 4 : Why is Node.js single-threaded?
-Answer : Node.js uses a single-threaded model for async processing, achieving better performance and scalability under typical web loads compared to thread-based implementations. It leverages an event loop to handle concurrency without multiple threads, avoiding overhead from context switching.[^1]
+Answer : Node.js uses a single-threaded model for async processing, achieving better performance and scalability under typical web loads compared to thread-based implementations. It leverages an event loop to handle concurrency without multiple threads, avoiding overhead from context switching.
 
 Question 5 : If Node.js is single-threaded, how does it handle concurrency?
-Answer : Node.js follows a Single-Threaded Event Loop Model, influenced by JavaScript's event-based callbacks. It manages concurrent requests via an event loop that processes non-blocking operations. POSIX threads handle internal I/O, and results are queued for the event loop, allowing high concurrency without blocking.[^2][^1]
+Answer : Node.js follows a Single-Threaded Event Loop Model, influenced by JavaScript's event-based callbacks. It manages concurrent requests via an event loop that processes non-blocking operations. POSIX threads handle internal I/O, and results are queued for the event loop, allowing high concurrency without blocking.
 
 Question 6 : Explain callback in Node.js.
-Answer : A callback is a function called after a task completes, allowing other code to run meanwhile and preventing blocking. Node.js relies heavily on callbacks for its asynchronous APIs, where all operations support them to manage non-blocking behavior.[^1]
+Answer : A callback is a function called after a task completes, allowing other code to run meanwhile and preventing blocking. Node.js relies heavily on callbacks for its asynchronous APIs, where all operations support them to manage non-blocking behavior.
 
 Question 7 : What are the advantages of using promises instead of callbacks?
-Answer : Promises provide structured control flow for asynchronous logic, low coupling, built-in error handling, and improved readability. They avoid deeply nested callbacks (callback hell), making code easier to maintain and debug.[^1]
+Answer : Promises provide structured control flow for asynchronous logic, low coupling, built-in error handling, and improved readability. They avoid deeply nested callbacks (callback hell), making code easier to maintain and debug.
 
 Question 8 : How would you define the term I/O?
-Answer : I/O (Input/Output) describes any program, operation, or device that transfers data between mediums. Every transfer is an output from one medium and input to another, involving physical devices, networks, or files.[^1]
+Answer : I/O (Input/Output) describes any program, operation, or device that transfers data between mediums. Every transfer is an output from one medium and input to another, involving physical devices, networks, or files.
 
 Question 9 : How is Node.js most frequently used?
-Answer : Node.js is commonly used for real-time chats, IoT applications, complex single-page applications (SPAs), collaboration tools, streaming services, and microservices architectures due to its efficiency in handling real-time data.[^1]
+Answer : Node.js is commonly used for real-time chats, IoT applications, complex single-page applications (SPAs), collaboration tools, streaming services, and microservices architectures due to its efficiency in handling real-time data.
 
 Question 10 : Explain the difference between frontend and backend development.
-Answer : Frontend involves the client-side (user-visible parts like UI with HTML, CSS, JavaScript, Angular, React), while backend handles server-side logic (e.g., servers, databases using Java, PHP, Python, Node.js). Frontend focuses on visuals; backend on data processing and requests.[^1]
+Answer : Frontend involves the client-side (user-visible parts like UI with HTML, CSS, JavaScript, Angular, React), while backend handles server-side logic (e.g., servers, databases using Java, PHP, Python, Node.js). Frontend focuses on visuals; backend on data processing and requests.
 
 Question 11 : What is NPM?
-Answer : NPM (Node Package Manager) manages packages and modules for Node.js, providing online repositories for searchable packages and a command-line utility for installation, version management, and dependencies.[^1]
+Answer : NPM (Node Package Manager) manages packages and modules for Node.js, providing online repositories for searchable packages and a command-line utility for installation, version management, and dependencies.
 
 Question 12 : What are the modules in Node.js?
-Answer : Modules are JavaScript libraries included via require() for specific functions. Key built-in ones include HTTP (for servers), util (utilities), fs (file I/O), url (parsing), query string (handling queries), stream (data streaming), and zlib (compression).[^1]
+Answer : Modules are JavaScript libraries included via require() for specific functions. Key built-in ones include HTTP (for servers), util (utilities), fs (file I/O), url (parsing), query string (handling queries), stream (data streaming), and zlib (compression).
 
 Question 13 : What is the purpose of module.exports?
-Answer : module.exports encapsulates related code into a single unit, allowing functions or objects to be exported from a file and imported elsewhere using require(), promoting modularity.[^1]
+Answer : module.exports encapsulates related code into a single unit, allowing functions or objects to be exported from a file and imported elsewhere using require(), promoting modularity.
 
 Question 14 : Why is Node.js preferred over other backend technologies like Java and PHP?
-Answer : Node.js is faster, has a vast NPM ecosystem (over 50,000 packages), supports real-time apps without API waits, synchronizes server-client code, and is easy for JavaScript developers. It's not ideal for heavy computations but excels in I/O-intensive tasks.[^1]
+Answer : Node.js is faster, has a vast NPM ecosystem (over 50,000 packages), supports real-time apps without API waits, synchronizes server-client code, and is easy for JavaScript developers. It's not ideal for heavy computations but excels in I/O-intensive tasks.
 
 Question 15 : What is the difference between Angular and Node.js?
-Answer : Angular is a frontend framework in TypeScript for client-side apps; Node.js is a server-side runtime in C/C++ for scalable networking apps. Angular splits apps into MVC; Node.js generates database queries.[^1]
+Answer : Angular is a frontend framework in TypeScript for client-side apps; Node.js is a server-side runtime in C/C++ for scalable networking apps. Angular splits apps into MVC; Node.js generates database queries.
 
 Question 16 : Which database is more popularly used with Node.js?
-Answer : MongoDB is popular with Node.js as it's a NoSQL, document-oriented database offering high performance, availability, and scalability, aligning well with Node's async nature.[^1]
+Answer : MongoDB is popular with Node.js as it's a NoSQL, document-oriented database offering high performance, availability, and scalability, aligning well with Node's async nature.
 
 Question 17 : What are some of the most commonly used libraries in Node.js?
-Answer : Express.js provides flexible web/mobile app frameworks; Mongoose simplifies database connections for MongoDB. These handle routing, middleware, and data modeling.[^1]
+Answer : Express.js provides flexible web/mobile app frameworks; Mongoose simplifies database connections for MongoDB. These handle routing, middleware, and data modeling.
 
 Question 18 : What are the pros and cons of Node.js?
-Answer : Pros: Fast event-based model, JavaScript usage, ideal for streaming/data-intensive ops. Cons: Not for heavy computations, complex callbacks, poor with relational DBs, single-threaded limits CPU tasks.[^1]
+Answer : Pros: Fast event-based model, JavaScript usage, ideal for streaming/data-intensive ops. Cons: Not for heavy computations, complex callbacks, poor with relational DBs, single-threaded limits CPU tasks.
 
 Question 19 : What is the command used to import external libraries?
-Answer : Use require("module_name") to import, e.g., var http = require("http"), loading the module for use.[^1]
+Answer : Use require("module_name") to import, e.g., var http = require("http"), loading the module for use.
 
 Question 20 : What does event-driven programming mean?
-Answer : It uses events (e.g., key presses, mouse clicks) to trigger callback functions, enabling responsive, non-blocking code execution.[^1]
+Answer : It uses events (e.g., key presses, mouse clicks) to trigger callback functions, enabling responsive, non-blocking code execution.
 
 Question 21 : What is an Event Loop in Node.js?
-Answer : The event loop handles asynchronous callbacks, forming the core of Node.js's non-blocking I/O, processing events one by one without waiting.[^1]
+Answer : The event loop handles asynchronous callbacks, forming the core of Node.js's non-blocking I/O, processing events one by one without waiting.
 
 Question 22 : Differentiate between process.nextTick() and setImmediate()?
-Answer : process.nextTick() executes at the start of the next event loop cycle; setImmediate() at the end, returning control for I/O.[^1]
+Answer : process.nextTick() executes at the start of the next event loop cycle; setImmediate() at the end, returning control for I/O.
 
 Question 23 : What is an EventEmitter in Node.js?
-Answer : EventEmitter is a class for objects that emit events, calling attached functions synchronously when an event is thrown.[^1]
+Answer : EventEmitter is a class for objects that emit events, calling attached functions synchronously when an event is thrown.
 
 Question 24 : What are the two types of API functions in Node.js?
-Answer : Asynchronous non-blocking (don't wait) and synchronous blocking (wait for completion).[^1]
+Answer : Asynchronous non-blocking (don't wait) and synchronous blocking (wait for completion).
 
 Question 25 : What is the package.json file?
-Answer : It's the core metadata file in a project's root, holding details like dependencies, scripts, and version info, editable via npm init.[^1]
+Answer : It's the core metadata file in a project's root, holding details like dependencies, scripts, and version info, editable via npm init.
 
 Question 26 : How would you use a URL module in Node.js?
-Answer : The URL module parses and resolves URLs into readable formats, e.g., url.parse() splits a web address.[^1]
+Answer : The URL module parses and resolves URLs into readable formats, e.g., url.parse() splits a web address.
 
 Question 27 : What is the Express.js package?
-Answer : Express is a flexible framework for web/mobile apps, handling routing, middleware, and HTTP requests/responses.[^1]
+Answer : Express is a flexible framework for web/mobile apps, handling routing, middleware, and HTTP requests/responses.
 
 Question 28 : How do you create a simple Express.js application?
-Answer : Use request/response objects: app.get('/', (req, res) => res.send('Hello')) to handle routes and responses.[^1]
+Answer : Use request/response objects: app.get('/', (req, res) => res.send('Hello')) to handle routes and responses.
 
 Question 29 : What are streams in Node.js?
-Answer : Streams read/write data continuously. Types: Readable (read ops), Writable (write ops), Duplex (both), Transform (modify during read/write).[^1]
+Answer : Streams read/write data continuously. Types: Readable (read ops), Writable (write ops), Duplex (both), Transform (modify during read/write).
 
 Question 30 : How do you install, update, and delete a dependency?
 
 ```
-Answer : Install: npm install <package>; Update: npm update <package>; Delete: npm uninstall <package>.[^1]
+Answer : Install: npm install <package>; Update: npm update <package>; Delete: npm uninstall <package>.
 ```
 
 Question 31 : How do you create a simple server in Node.js that returns Hello World?
-Answer : Require HTTP, createServer with callback: res.end('Hello World'), listen on port 8080.[^1]
+Answer : Require HTTP, createServer with callback: res.end('Hello World'), listen on port 8080.
 
 Question 32 : Explain asynchronous and non-blocking APIs in Node.js.
-Answer : All Node APIs are async/non-blocking; servers call APIs and move on, using events for notifications.[^1]
+Answer : All Node APIs are async/non-blocking; servers call APIs and move on, using events for notifications.
 
 Question 33 : How do we implement async in Node.js?
-Answer : Use async/await or promises to wait for operations without blocking, e.g., await request.get().[^1]
+Answer : Use async/await or promises to wait for operations without blocking, e.g., await request.get().
 
 Question 34 : What is a callback function in Node.js?
-Answer : It's called post-task to prevent blocking, essential for async operations.[^1]
+Answer : It's called post-task to prevent blocking, essential for async operations.
 
 Question 35 : What is REPL in Node.js?
-Answer : REPL (Read Eval Print Loop) is a shell-like environment for executing JavaScript commands, useful for testing/debugging.[^1]
+Answer : REPL (Read Eval Print Loop) is a shell-like environment for executing JavaScript commands, useful for testing/debugging.
 
 Question 36 : What is the control flow function?
-Answer : It manages code execution order between asynchronous calls, handling callbacks and errors.[^1]
+Answer : It manages code execution order between asynchronous calls, handling callbacks and errors.
 
 Question 37 : How does control flow manage the function calls?
-Answer : It sequences async calls, uses callbacks for results, and handles errors to maintain flow.[^1]
+Answer : It sequences async calls, uses callbacks for results, and handles errors to maintain flow.
 
 Question 38 : What is the difference between fork() and spawn() methods in Node.js?
-Answer : fork() creates a new V8 instance for parallel tasks; spawn() launches processes without new V8, for commands.[^1]
+Answer : fork() creates a new V8 instance for parallel tasks; spawn() launches processes without new V8, for commands.
 
 Question 39 : What is the buffer class in Node.js?
-Answer : It stores raw data like integer arrays, allocated outside V8 heap for binary data handling.[^1]
+Answer : It stores raw data like integer arrays, allocated outside V8 heap for binary data handling.
 
 Question 40 : What is piping in Node.js?
-Answer : Piping connects one stream's output to another's input, e.g., for data transfer between files.[^1]
+Answer : Piping connects one stream's output to another's input, e.g., for data transfer between files.
 
 Question 41 : What are some of the flags used in read/write operations in files?
-Answer : Flags like 'r' (read), 'w' (write), 'a' (append) control file access modes.[^1]
+Answer : Flags like 'r' (read), 'w' (write), 'a' (append) control file access modes.
 
 Question 42 : How do you open a file in Node.js?
-Answer : Use fs.open(path, flags, callback) to open files for reading/writing.[^1]
+Answer : Use fs.open(path, flags, callback) to open files for reading/writing.
 
 Question 43 : What is callback hell?
-Answer : It's deeply nested callbacks making code unreadable; caused by improper async logic.[^1]
+Answer : It's deeply nested callbacks making code unreadable; caused by improper async logic.
 
 Question 44 : What is a reactor pattern in Node.js?
-Answer : It's for non-blocking I/O, associating handlers with operations submitted to a demultiplexer.[^1]
+Answer : It's for non-blocking I/O, associating handlers with operations submitted to a demultiplexer.
 
 Question 45 : What is a test pyramid in Node.js?
-Answer : It suggests more unit tests, fewer integration tests, and even fewer end-to-end tests for efficient testing.[^1]
+Answer : It suggests more unit tests, fewer integration tests, and even fewer end-to-end tests for efficient testing.
 
 Question 46 : For Node.js, why does Google use the V8 engine?
-Answer : V8 compiles JavaScript to efficient machine code, boosting performance for browsers and Node.[^1]
+Answer : V8 compiles JavaScript to efficient machine code, boosting performance for browsers and Node.
 
 Question 47 : Describe Node.js exit codes.
-Answer : Codes like 1 (uncaught exception), 5 (fatal error) indicate process termination reasons.[^1]
+Answer : Codes like 1 (uncaught exception), 5 (fatal error) indicate process termination reasons.
 
 Question 48 : Explain the concept of middleware in Node.js.
-Answer : Middleware functions process requests/responses, executing code, modifying objects, or calling next in stack.[^1]
+Answer : Middleware functions process requests/responses, executing code, modifying objects, or calling next in stack.
 
 Question 49 : What are the different types of HTTP requests?
-Answer : GET (retrieve), POST (create/update), HEAD (headers only), DELETE (remove resources).[^1]
+Answer : GET (retrieve), POST (create/update), HEAD (headers only), DELETE (remove resources).
 
 Question 50 : How would you connect a MongoDB database to Node.js?
-Answer : Create MongoClient, specify URL with DB name, connect and create if needed.[^1]
+Answer : Create MongoClient, specify URL with DB name, connect and create if needed.
 
 Question 51 : What is the purpose of NODE_ENV?
-Answer : It sets environment (e.g., development/production) for config-specific behavior.[^1]
+Answer : It sets environment (e.g., development/production) for config-specific behavior.
 
 Question 52 : List the various Node.js timing features.
-Answer : setTimeout, setInterval, setImmediate for scheduling; process.nextTick for microtasks.[^1]
+Answer : setTimeout, setInterval, setImmediate for scheduling; process.nextTick for microtasks.
 
 Question 53 : What is WASI, and why is it being introduced?
-Answer : WASI (WebAssembly System Interface) provides sandboxed environments for secure execution.[^1]
+Answer : WASI (WebAssembly System Interface) provides sandboxed environments for secure execution.
 
 Question 54 : What is a first-class function in JavaScript?
-Answer : Functions treated as values, assignable, passable, enabling flexible async code in Node.[^1]
+Answer : Functions treated as values, assignable, passable, enabling flexible async code in Node.
 
 Question 55 : How do you manage packages in your Node.js project?
-Answer : Use NPM for installing/updating dependencies via package.json.[^1]
+Answer : Use NPM for installing/updating dependencies via package.json.
 
 Question 56 : How is Node.js better than other frameworks?
-Answer : It's fast, scalable, uses V8 engine, ideal for real-time apps.[^1]
+Answer : It's fast, scalable, uses V8 engine, ideal for real-time apps.
 
 Question 57 : What is a fork in Node.js?
-Answer : It creates child processes for CPU-intensive tasks or clustering.[^1]
+Answer : It creates child processes for CPU-intensive tasks or clustering.
 
 Question 58 : List down the two arguments that async.queue takes as input?
-Answer : Task function and concurrency limit.[^1]
+Answer : Task function and concurrency limit.
 
 Question 59 : What is the purpose of module.exports?
-Answer : Exports values/functions for import in other modules.[^1]
+Answer : Exports values/functions for import in other modules.
 
 Question 60 : What tools can be used to assure consistent code style?
-Answer : ESLint, Prettier for linting/formatting.[^1]
+Answer : ESLint, Prettier for linting/formatting.
 
 Question 61 : What is the difference between JavaScript and Node.js?
-Answer : JavaScript is the language; Node.js is its runtime for server-side execution.[^1]
+Answer : JavaScript is the language; Node.js is its runtime for server-side execution.
 
 Question 62 : What is the difference between asynchronous and synchronous functions?
-Answer : Sync blocks execution; async allows continuation, crucial for Node's scalability.[^1]
+Answer : Sync blocks execution; async allows continuation, crucial for Node's scalability.
 
 Question 63 : What are the asynchronous tasks that should occur in an event loop?
-Answer : I/O ops, timers, callbacks for non-blocking handling.[^1]
+Answer : I/O ops, timers, callbacks for non-blocking handling.
 
 Question 64 : What is the order of execution in control flow statements?
-Answer : Determined by event loop: phases like timers, I/O, check.[^1]
+Answer : Determined by event loop: phases like timers, I/O, check.
 
 Question 65 : What are the input arguments for an asynchronous queue?
-Answer : Worker function and concurrency limit.[^1]
+Answer : Worker function and concurrency limit.
 
 Question 66 : Are there any disadvantages to using Node.js?
-Answer : Not suited for CPU-intensive tasks, memory-heavy apps, or multi-threading.[^1]
+Answer : Not suited for CPU-intensive tasks, memory-heavy apps, or multi-threading.
 
 Question 67 : What is the primary reason for using the event-based model in Node.js?
-Answer : For non-blocking I/O, improving performance with many connections.[^1]
+Answer : For non-blocking I/O, improving performance with many connections.
 
 Question 68 : What is the difference between Node.js and Ajax?
-Answer : Ajax is client-side for dynamic pages; Node.js is server-side for apps.[^1]
+Answer : Ajax is client-side for dynamic pages; Node.js is server-side for apps.
 
 Question 69 : What is the advantage of using Node.js?
-Answer : Fast, scalable, easy to learn, great for real-time apps.[^1]
+Answer : Fast, scalable, easy to learn, great for real-time apps.
 
 Question 70 : Does Node run on Windows?
-Answer : Yes, it's cross-platform, including Windows.[^1]
+Answer : Yes, it's cross-platform, including Windows.
 
 Question 71 : Can you access DOM in Node?
-Answer : No, DOM is browser-specific; Node lacks it.[^1]
+Answer : No, DOM is browser-specific; Node lacks it.
 
 Question 72 : Why is Node.js quickly gaining attention from JAVA programmers?
-Answer : It's faster, less resource-intensive than Java for I/O tasks.[^1]
+Answer : It's faster, less resource-intensive than Java for I/O tasks.
 
 Question 73 : What are the Challenges with Node.js?
-Answer : Single-threaded limits CPU tasks; less mature ecosystem.[^1]
+Answer : Single-threaded limits CPU tasks; less mature ecosystem.
 
 Question 74 : What is "non-blocking" in Node.js?
-Answer : Allows code to continue while waiting for I/O, using callbacks.[^1]
+Answer : Allows code to continue while waiting for I/O, using callbacks.
 
 Question 75 : How does Node.js overcome the problem of blocking I/O operations?
-Answer : Via event-driven model with callbacks for async handling.[^1]
+Answer : Via event-driven model with callbacks for async handling.
 
 Question 76 : How can we use async await in Node.js?
-Answer : Mark functions async, use await for promises to pause execution.[^1]
+Answer : Mark functions async, use await for promises to pause execution.
 
 Question 77 : Why should you separate the Express app and server?
-Answer : For easier testing, scaling, and switching servers.[^1]
+Answer : For easier testing, scaling, and switching servers.
 
 Question 78 : Explain the concept of stub in Node.js.
-Answer : Placeholder functions for testing, returning predefined values.[^1]
+Answer : Placeholder functions for testing, returning predefined values.
 
 Question 79 : What is the framework that is used majorly in Node.js today?
-Answer : Express.js for web apps.[^1]
+Answer : Express.js for web apps.
 
 Question 80 : What are the security implementations that are present in Node.js?
-Answer : Sandboxing, TLS/SSL encryption, error handling.[^1]
+Answer : Sandboxing, TLS/SSL encryption, error handling.
 
 Question 81 : What is Libuv?
-Answer : Library for async I/O, event loop, thread pool in Node.[^1]
+Answer : Library for async I/O, event loop, thread pool in Node.
 
 Question 82 : What are global objects in Node.js?
-Answer : Always-available objects like process, console, buffer.[^1]
+Answer : Always-available objects like process, console, buffer.
 
 Question 83 : Why is assert used in Node.js?
-Answer : For testing assertions in code.[^1]
+Answer : For testing assertions in code.
 
 Question 84 : Why is ExpressJS used?
-Answer : For building robust web apps with middleware and routing.[^1]
+Answer : For building robust web apps with middleware and routing.
 
 Question 85 : What is the use of the connect module in Node.js?
-Answer : Handles middleware like error-handling, sessions.[^1]
+Answer : Handles middleware like error-handling, sessions.
 
 Question 86 : What's the difference between 'front-end' and 'back-end' development?
-Answer : Front-end: UI/interaction; back-end: server/data logic.[^1]
+Answer : Front-end: UI/interaction; back-end: server/data logic.
 
 Question 87 : What are LTS releases of Node.js?
-Answer : Long-term support versions, stable for 30 months.[^1]
+Answer : Long-term support versions, stable for 30 months.
 
 Question 88 : What do you understand about ESLint?
-Answer : Tool for analyzing JavaScript code for errors/styles.[^1]
+Answer : Tool for analyzing JavaScript code for errors/styles.
 
 Question 89 : Define the concept of the test pyramid. Please explain the process of implementing them in terms of HTTP APIs.
-Answer : Pyramid: Many unit tests, fewer integration/end-to-end. For APIs: Unit test models, integrate models, acceptance test endpoints.[^1]
+Answer : Pyramid: Many unit tests, fewer integration/end-to-end. For APIs: Unit test models, integrate models, acceptance test endpoints.
 
 Question 90 : How does Node.js handle the child threads?
-Answer : Via child_process module for spawning parallel processes.[^1]
+Answer : Via child_process module for spawning parallel processes.
 
 Question 91 : What is an Event Emitter in Node.js?
-Answer : Module for event-driven communication, emitting/listening to events.[^1]
+Answer : Module for event-driven communication, emitting/listening to events.
 
 Question 92 : How to Enhance Node.js Performance through Clustering?
-Answer : Use cluster module to spawn workers sharing ports.[^1]
+Answer : Use cluster module to spawn workers sharing ports.
 
 Question 93 : What is a thread pool, and which library handles it in Node.js?
-Answer : Pool of threads for async tasks; handled by libuv.[^1]
+Answer : Pool of threads for async tasks; handled by libuv.
 
 Question 94 : How are worker threads different from clusters?
-Answer : Workers: Multi-threading in one process; clusters: Multiple processes.[^1]
+Answer : Workers: Multi-threading in one process; clusters: Multiple processes.
 
 Question 95 : How to measure the duration of async operations?
-Answer : Use console.time/timeEnd or performance.now.[^1]
+Answer : Use console.time/timeEnd or performance.now.
 
 Question 96 : How to measure the performance of async operations?
-Answer : Tools like --prof flag, perf, benchmark.js.[^1]
+Answer : Tools like --prof flag, perf, benchmark.js.
 
 Question 97 : What are the types of streams available in Node.js?
-Answer : Readable, writable, duplex, transform.[^1]
+Answer : Readable, writable, duplex, transform.
 
 Question 98 : What is meant by tracing in Node.js?
-Answer : Profiling performance by recording function calls/events.[^1]
+Answer : Profiling performance by recording function calls/events.
 
 Question 99 : Where is package.json used in Node.js?
-Answer : In root for metadata, dependencies; used by npm.[^1]
+Answer : In root for metadata, dependencies; used by npm.
 
 Question 100 : What is the difference between readFile and createReadStream in Node.js?
 Answer : readFile loads entire file into memory; createReadStream streams in chunks, better for large files.[^1

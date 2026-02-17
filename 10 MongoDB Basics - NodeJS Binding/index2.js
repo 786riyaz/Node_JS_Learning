@@ -1,7 +1,7 @@
 const { MongoClient } = require('mongodb');
 const url = 'mongodb://localhost:27017';
-const dbName = 'E-Commerce';
 const client = new MongoClient(url);
+const dbName = 'E-Commerce';
 
 async function connectAndPrintAllData() {
     try {
@@ -23,7 +23,6 @@ async function connectAndPrintAllData() {
             console.log(`\n🗂 Documents in Collection "${collectionName}":`);
             console.log(documents);
         }
-
     } catch (err) {
         console.error('❌ MongoDB connection error:', err);
     } finally {
