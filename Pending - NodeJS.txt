@@ -1,4 +1,3 @@
-***NodeJS***
 multer
 What is helmet
 long poling example
@@ -55,16 +54,3 @@ controller abortController and signal
 exoressSession
 app.use(flash())
 req.flash("error", "You Need to login first")
-======================================================
-*** JavaScript ***
-Destructuring in JS
-async await
-======================================================
-*** MongoDB ***
-Data association in MongoDB
-populate method with find
-sharding
-======================================================
-*** React ***
-React Router
-What is strict Mode
